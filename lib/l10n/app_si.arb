@@ -1,0 +1,544 @@
+{
+  "@@locale": "si",
+  "appTitle": "මනස් මාර්ගය",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "login": "ඇතුල් වන්න",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "ලියාපදිංචි වන්න",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "විද්‍යුත් තැපෑල",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "මුරපදය",
+  "@password": {
+    "description": "Password field label"
+  },
+  "confirmPassword": "මුරපදය තහවුරු කරන්න",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "fullName": "සම්පූර්ණ නම",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "dashboard": "පිරිපහදු උපකරණ පුවරුව",
+  "@dashboard": {
+    "description": "Dashboard screen title"
+  },
+  "progressStatistics": "ප්‍රගතිය සහ සංඛ්‍යාලේඛන",
+  "@progressStatistics": {
+    "description": "Progress screen title"
+  },
+  "journalEntries": "දිනපොත ඇතුළත් කිරීම්",
+  "@journalEntries": {
+    "description": "Journal screen title"
+  },
+  "cravingTracker": "අවශ්‍යතා ලුහුබඳින්නා",
+  "@cravingTracker": {
+    "description": "Craving tracker screen title"
+  },
+  "appointments": "නියමයන්",
+  "@appointments": {
+    "description": "Appointments screen title"
+  },
+  "chatWithCounsellor": "සහායකයා සමඟ කථා කරන්න",
+  "@chatWithCounsellor": {
+    "description": "Chat screen title"
+  },
+  "resources": "සම්පත",
+  "@resources": {
+    "description": "Resources screen title"
+  },
+  "wellnessHealth": "සුබසාධක සහ සෞඛ්‍යය",
+  "@wellnessHealth": {
+    "description": "Wellness screen title"
+  },
+  "supportGroupDirectory": "සහායක කණ්ඩායම් නාමාවලිය",
+  "@supportGroupDirectory": {
+    "description": "Support groups screen title"
+  },
+  "achievementsBadges": "ජයග්‍රහණ සහ ලාංඡන",
+  "@achievementsBadges": {
+    "description": "Achievements screen title"
+  },
+  "copingSkillsLibrary": "මනෝභාවන කුසලතා පුස්තකාලය",
+  "@copingSkillsLibrary": {
+    "description": "Coping skills screen title"
+  },
+  "communityForum": "සමාජ සභාව",
+  "@communityForum": {
+    "description": "Community forum screen title"
+  },
+  "successStories": "ජයග්‍රහණ කථාන්දර",
+  "@successStories": {
+    "description": "Success stories screen title"
+  },
+  "medicationTracker": "ඔෂධ ලුහුබඳින්නා",
+  "@medicationTracker": {
+    "description": "Medication tracker screen title"
+  },
+  "notifications": "දැනුම්දීම්",
+  "@notifications": {
+    "description": "Notifications screen title"
+  },
+  "emergencyResources": "හදිසියක සම්පත",
+  "@emergencyResources": {
+    "description": "Emergency resources screen title"
+  },
+  "profileSettings": "පැතිකඩ සැකසීම්",
+  "@profileSettings": {
+    "description": "Profile screen title"
+  },
+  "appSettings": "යෙදුම් සැකසීම්",
+  "@appSettings": {
+    "description": "Settings screen title"
+  },
+  "logout": "අත්හරින්න",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "language": "භාෂාව",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "english": "ඉංග්‍රීසි",
+  "@english": {
+    "description": "English language name"
+  },
+  "sinhala": "සිංහල",
+  "@sinhala": {
+    "description": "Sinhala language name"
+  },
+  "tamil": "தமிழ்",
+  "@tamil": {
+    "description": "Tamil language name"
+  },
+  "recoveryOverview": "පිරිපහදු උපකරණ දෘශ්‍යය",
+  "@recoveryOverview": {
+    "description": "Recovery overview section title"
+  },
+  "daysSober": "නිර්මල දින",
+  "@daysSober": {
+    "description": "Days sober label"
+  },
+  "currentStreak": "වත්මන් පුහුණුව",
+  "@currentStreak": {
+    "description": "Current streak label"
+  },
+  "milestonesAchieved": "ජයග්‍රහණ ලකුණු",
+  "@milestonesAchieved": {
+    "description": "Milestones achieved label"
+  },
+  "journalEntriesCount": "දිනපොත ඇතුළත් කිරීම්",
+  "@journalEntriesCount": {
+    "description": "Journal entries count label"
+  },
+  "howAreYouFeeling": "ඔබට කෙසේම දැනේද?",
+  "@howAreYouFeeling": {
+    "description": "Mood selection prompt"
+  },
+  "save": "සුරකින්න",
+  "@save": {
+    "description": "Save button text"
+  },
+  "cancel": "අවලංගු කරන්න",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "close": "වසන්න",
+  "@close": {
+    "description": "Close button text"
+  },
+  "delete": "මකන්න",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "edit": "සංස්කරණය කරන්න",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  "add": "එකතු කරන්න",
+  "@add": {
+    "description": "Add button text"
+  },
+  "search": "සොයන්න",
+  "@search": {
+    "description": "Search field placeholder"
+  },
+  "filter": "පෙරහන් කරන්න",
+  "@filter": {
+    "description": "Filter button text"
+  },
+  "all": "සියල්ල",
+  "@all": {
+    "description": "All filter option"
+  },
+  "today": "අද",
+  "@today": {
+    "description": "Today label"
+  },
+  "yesterday": "ඊයේ",
+  "@yesterday": {
+    "description": "Yesterday label"
+  },
+  "thisWeek": "මෙම සතිය",
+  "@thisWeek": {
+    "description": "This week label"
+  },
+  "thisMonth": "මෙම මාසය",
+  "@thisMonth": {
+    "description": "This month label"
+  },
+  "settings": "සැකසීම්",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "sound": "ශබ්දය",
+  "@sound": {
+    "description": "Sound setting"
+  },
+  "dataCollection": "දත්ත එකතු කිරීම",
+  "@dataCollection": {
+    "description": "Data collection setting"
+  },
+  "privacyPolicy": "පුද්ගලිකත්ව ප්‍රතිපත්තිය",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "termsOfService": "සේවා නියමයන්",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "about": "ගැන",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "අනුවාදය",
+  "@version": {
+    "description": "Version label"
+  },
+  "display": "පෙන්වීම",
+  "@display": {
+    "description": "Display section title"
+  },
+  "darkMode": "අඳුරු ක්‍රමය",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
+  "themeColor": "තේම වර්ණය",
+  "@themeColor": {
+    "description": "Theme color setting label"
+  },
+  "pushNotifications": "පෙරහන් දැනුම්දීම්",
+  "@pushNotifications": {
+    "description": "Push notifications setting label"
+  },
+  "soundEffects": "ශබ්ද බලපෑම්",
+  "@soundEffects": {
+    "description": "Sound effects setting label"
+  },
+  "pushNotificationsDescription": "යාවත්කාලීන කිරීම් සහ මතක් කිරීම ලබා ගන්න",
+  "@pushNotificationsDescription": {
+    "description": "Push notifications subtitle"
+  },
+  "soundEffectsDescription": "දැනුම්දීම් සඳහා ශබ්ද වත් කරන්න",
+  "@soundEffectsDescription": {
+    "description": "Sound effects subtitle"
+  },
+  "darkModeDescription": "සෑම විටම අඳුරු තේමාව සක්‍රීය කරන්න",
+  "@darkModeDescription": {
+    "description": "Dark mode subtitle"
+  },
+  "dataPrivacy": "දත්ත සහ පුද්ගලිකත්වය",
+  "@dataPrivacy": {
+    "description": "Data and privacy section title"
+  },
+  "account": "ගිණුම",
+  "@account": {
+    "description": "Account section title"
+  },
+  "helpImproveAnalytics": "යෙදුම වඩාත් තරුණ කර ගැනීමට දත්ත එකතු කරන්න",
+  "@helpImproveAnalytics": {
+    "description": "Data collection subtitle"
+  },
+  "changePassword": "මුරපදය වෙනස් කරන්න",
+  "@changePassword": {
+    "description": "Change password tile label"
+  },
+  "linkedDevices": "සම්බන්ධිත උපාංග",
+  "@linkedDevices": {
+    "description": "Linked devices tile label"
+  },
+  "appVersion": "යෙදුම් අනුවාදය",
+  "@appVersion": {
+    "description": "App version label"
+  },
+  "buildNumberLabel": "ගොඩනැගීමේ අංකය",
+  "@buildNumberLabel": {
+    "description": "Build number label"
+  },
+  "lastUpdated": "අවසන් වරට යාවත්කාලීන කරන ලද්දේ",
+  "@lastUpdated": {
+    "description": "Last updated label"
+  },
+  "logoutConfirmation": "ඔබට ලොග් අයින් වීමට අවශ්‍යද?",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation prompt"
+  },
+  "chatTitle": "අනුමාන උපදේශක සමඟ සෙසු",
+  "@chatTitle": {
+    "description": "Chat screen title"
+  },
+  "counsellorSarah": "උපදේශක සාරා",
+  "@counsellorSarah": {
+    "description": "Chat counsellor name"
+  },
+  "chatGreeting": "හෙලෝ! අද ඔබට කෙසේ දැනේද?",
+  "@chatGreeting": {
+    "description": "Initial chat greeting"
+  },
+  "chatFeelingAnxious": "මට රැකියාව ගැන ටිකක් උතුරු හැඟීමක් තියෙන්නේ.",
+  "@chatFeelingAnxious": {
+    "description": "User message about work anxiety"
+  },
+  "chatResponseWorkStress": "ඒ දේ අවබෝධ කරගන්න පුළුවන්. වැඩ පීඩාව අවධානයට පත් කළ හැක. මෙම තත්ත්වය කැටි කරන හේතුව දැක්වන්න පුළුවන්ද?",
+  "@chatResponseWorkStress": {
+    "description": "Counsellor response about work stress"
+  },
+  "chatPresentationWorry": "මට විශාල ඉදිරිපත් කිරීමක් තියෙනවා, ඒක අසාර්ථක වෙනවාද කියලා මා බිය වෙලා ඉන්නේ.",
+  "@chatPresentationWorry": {
+    "description": "User message about presentation worry"
+  },
+  "chatPreppingAnxiety": "ඉදිරිපත් කිරීම් ගැන සැකයක් දැනීම සාමාන්‍යයි. සූදානම් වීමට සහ ඔබේ පීඩා කළමනාකරණය කිරීමට අපි උපාය මාර්ග සෙවීමට ඉඩ සලසමු.",
+  "@chatPreppingAnxiety": {
+    "description": "Counsellor response about presentation anxiety"
+  },
+  "chatFollowUpResponse": "ඔබ ඒ ගැන බෙදාගත්තේට ස්තුතියි. මේ ලෙස හැඟීමක් දැනීම සාමාන්‍යයි. අපි එය එක්ව එකට විසඳමු.",
+  "@chatFollowUpResponse": {
+    "description": "Counsellor follow-up response"
+  },
+  "chatAutoResponse": "ඒ ගැන මට උදව් කිරීමට මට සූදානම්. අපි සිදුවෙන්නේ කුමක්ද කියා කතා කරමු.",
+  "@chatAutoResponse": {
+    "description": "Automated chat response"
+  },
+  "counsellorTyping": "උපදේශකයා ටයිප් කරමින් සිටී",
+  "@counsellorTyping": {
+    "description": "Typing indicator text"
+  },
+  "shareFeelingHint": "ඔබට ලැබෙන හැඟීම් බෙදා ගන්න...",
+  "@shareFeelingHint": {
+    "description": "Chat input placeholder"
+  },
+  "quickReplyCravings": "මට කැමති කම්පනයන්ටට වටිනවා",
+  "@quickReplyCravings": {
+    "description": "Quick reply for cravings"
+  },
+  "quickReplyCopingStrategies": "මට වටින උපාය මඟ පෙන්වන්න",
+  "@quickReplyCopingStrategies": {
+    "description": "Quick reply for coping strategies"
+  },
+  "quickReplyTriggered": "මම හදිසියට හැඟීම් දැනෙයි",
+  "@quickReplyTriggered": {
+    "description": "Quick reply for feeling triggered"
+  },
+  "quickReplyRelapse": "මට නැවත ප්‍රතිලාභ ගැන කතා කරන්න ඕනෑයි",
+  "@quickReplyRelapse": {
+    "description": "Quick reply for relapse"
+  },
+  "quickReplyProud": "මගේ ප්‍රගතිය ගැන මට ගෞරවයි",
+  "@quickReplyProud": {
+    "description": "Quick reply for pride"
+  },
+  "emergencyContactInitiated": "හදිසි සම්බන්ධතා ආරම්භ කරන ලදී",
+  "@emergencyContactInitiated": {
+    "description": "Emergency snackbar text"
+  },
+  "appointmentsAndBooking": "ඇපොයින්ට්මන්ට් සහ වෙන්කිරීම",
+  "@appointmentsAndBooking": {
+    "description": "Appointments screen title"
+  },
+  "yourAppointments": "ඔබගේ ඇපොයින්ට්මන්ට්",
+  "@yourAppointments": {
+    "description": "Your appointments section title"
+  },
+  "upcoming": "ඉදිරි",
+  "@upcoming": {
+    "description": "Upcoming label"
+  },
+  "completed": "සම්පූර්ණයි",
+  "@completed": {
+    "description": "Completed label"
+  },
+  "scheduledSessions": "පෙළගැස්වූ සැසි",
+  "@scheduledSessions": {
+    "description": "Scheduled sessions section title"
+  },
+  "bookNewAppointment": "නව ඇපොයින්ට්මන්ට් වෙන් කරන්න",
+  "@bookNewAppointment": {
+    "description": "Book new appointment section title"
+  },
+  "cancellationPolicy": "අවලංගු කිරීමේ ප්‍රතිපත්තිය",
+  "@cancellationPolicy": {
+    "description": "Cancellation policy title"
+  },
+  "cancellationPolicyText": "කරුණාකර අපහසුතාව වලට පත්වීමට පෙර පැය 24 කට අව්වත් ඇපොයින්ට්මන්ට් අවලංගු කරන්න.",
+  "@cancellationPolicyText": {
+    "description": "Cancellation policy text"
+  },
+  "selectCounsellor": "උපදේශකයා තෝරන්න:",
+  "@selectCounsellor": {
+    "description": "Select counsellor label"
+  },
+  "chooseCounsellor": "උපදේශකයා තෝරන්න",
+  "@chooseCounsellor": {
+    "description": "Hint text to choose counsellor"
+  },
+  "preferredDate": "ප්‍රියතම දිනය:",
+  "@preferredDate": {
+    "description": "Preferred date label"
+  },
+  "selectDate": "දිනය තෝරන්න",
+  "@selectDate": {
+    "description": "Hint text to select a date"
+  },
+  "sessionType": "සැසිය වර්ගය:",
+  "@sessionType": {
+    "description": "Session type label"
+  },
+  "videoCall": "වීඩියෝ ඇමතුම",
+  "@videoCall": {
+    "description": "Video call option"
+  },
+  "phone": "දුරකථන",
+  "@phone": {
+    "description": "Phone option"
+  },
+  "available": "ලබා ගත හැකි",
+  "@available": {
+    "description": "Available label"
+  },
+  "withLabel": "සමඟ",
+  "@withLabel": {
+    "description": "With label in appointment details"
+  },
+  "dateLabel": "දිනය:",
+  "@dateLabel": {
+    "description": "Date label for appointment details"
+  },
+  "timeLabel": "වේලාව:",
+  "@timeLabel": {
+    "description": "Time label for appointment details"
+  },
+  "methodLabel": "ආකාරය:",
+  "@methodLabel": {
+    "description": "Method label for appointment details"
+  },
+  "statusLabel": "තත්ත්වය:",
+  "@statusLabel": {
+    "description": "Status label for appointment details"
+  },
+  "appointmentRequestSent": "ඇපොයින්ට්මන්ට් ඉල්ලීම යවයි! තහවුරු කිරීම සමීපයෙන් පැමිණේ.", 
+  "@appointmentRequestSent": {
+    "description": "Appointment request snackbar text"
+  },
+  "bookWithCounsellor": "{name} සමඟ වෙන් කරගන්න",
+  "@bookWithCounsellor": {
+    "description": "Dialog title for booking counsellor",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "confirmationSent": "ඔබගේ විද්‍යුත් තැපැල් හා දුරකථන අංකයට තහවුරු කිරීම යවනු ලැබේ.",
+  "@confirmationSent": {
+    "description": "Booking confirmation note"
+  },
+  "appointmentBookedWith": "{name} සමඟ ඇපොයින්ට්මන්ට් වෙන්කරන ලදී!",
+  "@appointmentBookedWith": {
+    "description": "Appointment booked snackbar text",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "confirmBooking": "වෙන්කිරීම තහවුරු කිරීම",
+  "@confirmBooking": {
+    "description": "Confirm booking button"
+  },
+  "appointmentConfirmed": "ඇපොයින්ට්මන්ට් තහවුරු කරන ලදී!",
+  "@appointmentConfirmed": {
+    "description": "Appointment confirmed snackbar text"
+  },
+  "confirmed": "තහවුරු කරන ලදී",
+  "@confirmed": {
+    "description": "Confirmed appointment status"
+  },
+  "pending": "පැවසුණු",
+  "@pending": {
+    "description": "Pending appointment status"
+  },
+  "counsellingSession": "උපදේශන සැසිය",
+  "@counsellingSession": {
+    "description": "Counselling session type"
+  },
+  "supportGroupMeeting": "සහාය කණ්ඩායම් හමුව",
+  "@supportGroupMeeting": {
+    "description": "Support group meeting type"
+  },
+  "followUpSession": "අනුගමන සැසිය",
+  "@followUpSession": {
+    "description": "Follow-up session type"
+  },
+  "inPerson": "සිරස්මූඛ",
+  "@inPerson": {
+    "description": "In-person appointment type"
+  },
+  "phoneCall": "දුරකථන ඇමතුම",
+  "@phoneCall": {
+    "description": "Phone call appointment type"
+  },
+  "bookNewAppointmentButton": "ඇපොයින්ට්මන්ට් ඉල්ලීම කරන්න",
+  "@bookNewAppointmentButton": {
+    "description": "Request appointment button text"
+  },
+  "bookWithLabel": "{name} සමඟ වෙන් කරගන්න",
+  "@bookWithLabel": {
+    "description": "Book counsellor with name",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "cancelLabel": "අවලංගු කරන්න",
+  "@cancelLabel": {
+    "description": "Cancel button text"
+  },
+  "appointmentCanceled": "අවලංගු කරන්න",
+  "@appointmentCanceled": {
+    "description": "Cancel button label"
+  },
+  "closeLabel": "මූලය",
+  "@closeLabel": {
+    "description": "Close button label"
+  },
+  "helpSupport": "උදව් සහ සහාය",
+  "@helpSupport": {
+    "description": "Help and support section"
+  },
+  "contactUs": "අප සම්බන්ධ කර ගන්න",
+  "@contactUs": {
+    "description": "Contact us link"
+  },
+  "feedback": "පිළිගත්තාවය",
+  "@feedback": {
+    "description": "Feedback link"
+  },
+  "rateApp": "යෙදුම් අගය කරන්න",
+  "@rateApp": {
+    "description": "Rate app link"
+  }
+}

@@ -1,0 +1,544 @@
+{
+  "@@locale": "en",
+  "appTitle": "MindPath",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "dashboard": "Recovery Dashboard",
+  "@dashboard": {
+    "description": "Dashboard screen title"
+  },
+  "progressStatistics": "Progress & Statistics",
+  "@progressStatistics": {
+    "description": "Progress screen title"
+  },
+  "journalEntries": "Journal Entries",
+  "@journalEntries": {
+    "description": "Journal screen title"
+  },
+  "cravingTracker": "Craving Tracker",
+  "@cravingTracker": {
+    "description": "Craving tracker screen title"
+  },
+  "appointments": "Appointments",
+  "@appointments": {
+    "description": "Appointments screen title"
+  },
+  "chatWithCounsellor": "Chat with Counsellor",
+  "@chatWithCounsellor": {
+    "description": "Chat screen title"
+  },
+  "resources": "Resources",
+  "@resources": {
+    "description": "Resources screen title"
+  },
+  "wellnessHealth": "Wellness & Health",
+  "@wellnessHealth": {
+    "description": "Wellness screen title"
+  },
+  "supportGroupDirectory": "Support Group Directory",
+  "@supportGroupDirectory": {
+    "description": "Support groups screen title"
+  },
+  "achievementsBadges": "Achievements & Badges",
+  "@achievementsBadges": {
+    "description": "Achievements screen title"
+  },
+  "copingSkillsLibrary": "Coping Skills Library",
+  "@copingSkillsLibrary": {
+    "description": "Coping skills screen title"
+  },
+  "communityForum": "Community Forum",
+  "@communityForum": {
+    "description": "Community forum screen title"
+  },
+  "successStories": "Success Stories",
+  "@successStories": {
+    "description": "Success stories screen title"
+  },
+  "medicationTracker": "Medication Tracker",
+  "@medicationTracker": {
+    "description": "Medication tracker screen title"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications screen title"
+  },
+  "emergencyResources": "Emergency Resources",
+  "@emergencyResources": {
+    "description": "Emergency resources screen title"
+  },
+  "profileSettings": "Profile Settings",
+  "@profileSettings": {
+    "description": "Profile screen title"
+  },
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "Settings screen title"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "sinhala": "සිංහල",
+  "@sinhala": {
+    "description": "Sinhala language name"
+  },
+  "tamil": "தமிழ்",
+  "@tamil": {
+    "description": "Tamil language name"
+  },
+  "recoveryOverview": "Recovery Overview",
+  "@recoveryOverview": {
+    "description": "Recovery overview section title"
+  },
+  "daysSober": "Days Sober",
+  "@daysSober": {
+    "description": "Days sober label"
+  },
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Current streak label"
+  },
+  "milestonesAchieved": "Milestones Achieved",
+  "@milestonesAchieved": {
+    "description": "Milestones achieved label"
+  },
+  "journalEntriesCount": "Journal Entries",
+  "@journalEntriesCount": {
+    "description": "Journal entries count label"
+  },
+  "howAreYouFeeling": "How are you feeling?",
+  "@howAreYouFeeling": {
+    "description": "Mood selection prompt"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add button text"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search field placeholder"
+  },
+  "filter": "Filter",
+  "@filter": {
+    "description": "Filter button text"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All filter option"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Today label"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Yesterday label"
+  },
+  "thisWeek": "This Week",
+  "@thisWeek": {
+    "description": "This week label"
+  },
+  "thisMonth": "This Month",
+  "@thisMonth": {
+    "description": "This month label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings title"
+  },
+  "sound": "Sound",
+  "@sound": {
+    "description": "Sound setting"
+  },
+  "dataCollection": "Data Collection",
+  "@dataCollection": {
+    "description": "Data collection setting"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service link"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  "display": "Display",
+  "@display": {
+    "description": "Display section title"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
+  "themeColor": "Theme Color",
+  "@themeColor": {
+    "description": "Theme color setting label"
+  },
+  "pushNotifications": "Push Notifications",
+  "@pushNotifications": {
+    "description": "Push notifications setting label"
+  },
+  "soundEffects": "Sound Effects",
+  "@soundEffects": {
+    "description": "Sound effects setting label"
+  },
+  "pushNotificationsDescription": "Get updates and reminders",
+  "@pushNotificationsDescription": {
+    "description": "Push notifications subtitle"
+  },
+  "soundEffectsDescription": "Play sound for notifications",
+  "@soundEffectsDescription": {
+    "description": "Sound effects subtitle"
+  },
+  "darkModeDescription": "Always enable dark theme",
+  "@darkModeDescription": {
+    "description": "Dark mode subtitle"
+  },
+  "dataPrivacy": "Data & Privacy",
+  "@dataPrivacy": {
+    "description": "Data and privacy section title"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account section title"
+  },
+  "helpImproveAnalytics": "Help improve app with analytics",
+  "@helpImproveAnalytics": {
+    "description": "Data collection subtitle"
+  },
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "description": "Change password tile label"
+  },
+  "linkedDevices": "Linked Devices",
+  "@linkedDevices": {
+    "description": "Linked devices tile label"
+  },
+  "appVersion": "App Version",
+  "@appVersion": {
+    "description": "App version label"
+  },
+  "buildNumberLabel": "Build Number",
+  "@buildNumberLabel": {
+    "description": "Build number label"
+  },
+  "lastUpdated": "Last Updated",
+  "@lastUpdated": {
+    "description": "Last updated label"
+  },
+  "logoutConfirmation": "Are you sure you want to logout?",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation prompt"
+  },
+  "chatTitle": "Chat with Counsellor",
+  "@chatTitle": {
+    "description": "Chat screen title"
+  },
+  "counsellorSarah": "Counsellor Sarah",
+  "@counsellorSarah": {
+    "description": "Chat counsellor name"
+  },
+  "chatGreeting": "Hello! How are you feeling today?",
+  "@chatGreeting": {
+    "description": "Initial chat greeting"
+  },
+  "chatFeelingAnxious": "I'm feeling a bit anxious about work.",
+  "@chatFeelingAnxious": {
+    "description": "User message about work anxiety"
+  },
+  "chatResponseWorkStress": "That's completely understandable. Work stress can be overwhelming. Can you tell me more about what's causing this anxiety?",
+  "@chatResponseWorkStress": {
+    "description": "Counsellor response about work stress"
+  },
+  "chatPresentationWorry": "I have a big presentation coming up and I'm worried about messing up.",
+  "@chatPresentationWorry": {
+    "description": "User message about presentation worry"
+  },
+  "chatPreppingAnxiety": "It's normal to feel nervous about presentations. Let's explore some strategies to help you prepare and manage your anxiety.",
+  "@chatPreppingAnxiety": {
+    "description": "Counsellor response about presentation anxiety"
+  },
+  "chatFollowUpResponse": "Thank you for sharing that. Remember, it's okay to feel this way. We can work through this together.",
+  "@chatFollowUpResponse": {
+    "description": "Counsellor follow-up response"
+  },
+  "chatAutoResponse": "I'm here to help with that. Let's discuss what's going on.",
+  "@chatAutoResponse": {
+    "description": "Automated chat response"
+  },
+  "counsellorTyping": "Counsellor is typing",
+  "@counsellorTyping": {
+    "description": "Typing indicator text"
+  },
+  "shareFeelingHint": "Share how you're feeling...",
+  "@shareFeelingHint": {
+    "description": "Chat input placeholder"
+  },
+  "quickReplyCravings": "I'm struggling with cravings",
+  "@quickReplyCravings": {
+    "description": "Quick reply for cravings"
+  },
+  "quickReplyCopingStrategies": "I need coping strategies",
+  "@quickReplyCopingStrategies": {
+    "description": "Quick reply for coping strategies"
+  },
+  "quickReplyTriggered": "I'm feeling triggered",
+  "@quickReplyTriggered": {
+    "description": "Quick reply for feeling triggered"
+  },
+  "quickReplyRelapse": "I want to talk about relapse",
+  "@quickReplyRelapse": {
+    "description": "Quick reply for relapse"
+  },
+  "quickReplyProud": "I'm proud of my progress",
+  "@quickReplyProud": {
+    "description": "Quick reply for pride"
+  },
+  "emergencyContactInitiated": "Emergency contact initiated",
+  "@emergencyContactInitiated": {
+    "description": "Emergency snackbar text"
+  },
+  "appointmentsAndBooking": "Appointments & Booking",
+  "@appointmentsAndBooking": {
+    "description": "Appointments screen title"
+  },
+  "yourAppointments": "Your Appointments",
+  "@yourAppointments": {
+    "description": "Your appointments section title"
+  },
+  "upcoming": "Upcoming",
+  "@upcoming": {
+    "description": "Upcoming label"
+  },
+  "completed": "Completed",
+  "@completed": {
+    "description": "Completed label"
+  },
+  "scheduledSessions": "Scheduled Sessions",
+  "@scheduledSessions": {
+    "description": "Scheduled sessions section title"
+  },
+  "bookNewAppointment": "Book New Appointment",
+  "@bookNewAppointment": {
+    "description": "Book new appointment section title"
+  },
+  "cancellationPolicy": "Cancellation Policy",
+  "@cancellationPolicy": {
+    "description": "Cancellation policy title"
+  },
+  "cancellationPolicyText": "Please cancel appointments at least 24 hours in advance to avoid any inconvenience.",
+  "@cancellationPolicyText": {
+    "description": "Cancellation policy text"
+  },
+  "selectCounsellor": "Select Counsellor:",
+  "@selectCounsellor": {
+    "description": "Select counsellor label"
+  },
+  "chooseCounsellor": "Choose counsellor",
+  "@chooseCounsellor": {
+    "description": "Hint text to choose counsellor"
+  },
+  "preferredDate": "Preferred Date:",
+  "@preferredDate": {
+    "description": "Preferred date label"
+  },
+  "selectDate": "Select date",
+  "@selectDate": {
+    "description": "Hint text to select a date"
+  },
+  "sessionType": "Session Type:",
+  "@sessionType": {
+    "description": "Session type label"
+  },
+  "videoCall": "Video Call",
+  "@videoCall": {
+    "description": "Video call option"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone option"
+  },
+  "available": "Available",
+  "@available": {
+    "description": "Available label"
+  },
+  "withLabel": "With",
+  "@withLabel": {
+    "description": "With label in appointment details"
+  },
+  "dateLabel": "Date:",
+  "@dateLabel": {
+    "description": "Date label for appointment details"
+  },
+  "timeLabel": "Time:",
+  "@timeLabel": {
+    "description": "Time label for appointment details"
+  },
+  "methodLabel": "Method:",
+  "@methodLabel": {
+    "description": "Method label for appointment details"
+  },
+  "statusLabel": "Status:",
+  "@statusLabel": {
+    "description": "Status label for appointment details"
+  },
+  "appointmentRequestSent": "Appointment request sent! Confirmation coming soon.",
+  "@appointmentRequestSent": {
+    "description": "Appointment request snackbar text"
+  },
+  "bookWithCounsellor": "Book with {name}",
+  "@bookWithCounsellor": {
+    "description": "Dialog title for booking counsellor",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "confirmationSent": "A confirmation will be sent to your email and phone number on file.",
+  "@confirmationSent": {
+    "description": "Booking confirmation note"
+  },
+  "appointmentBookedWith": "Appointment booked with {name}!",
+  "@appointmentBookedWith": {
+    "description": "Appointment booked snackbar text",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "confirmBooking": "Confirm Booking",
+  "@confirmBooking": {
+    "description": "Confirm booking button"
+  },
+  "appointmentConfirmed": "Appointment confirmed!",
+  "@appointmentConfirmed": {
+    "description": "Appointment confirmed snackbar text"
+  },
+  "confirmed": "Confirmed",
+  "@confirmed": {
+    "description": "Confirmed appointment status"
+  },
+  "pending": "Pending",
+  "@pending": {
+    "description": "Pending appointment status"
+  },
+  "counsellingSession": "Counselling Session",
+  "@counsellingSession": {
+    "description": "Counselling session type"
+  },
+  "supportGroupMeeting": "Support Group Meeting",
+  "@supportGroupMeeting": {
+    "description": "Support group meeting type"
+  },
+  "followUpSession": "Follow-up Session",
+  "@followUpSession": {
+    "description": "Follow-up session type"
+  },
+  "inPerson": "In-Person",
+  "@inPerson": {
+    "description": "In-person appointment type"
+  },
+  "phoneCall": "Phone Call",
+  "@phoneCall": {
+    "description": "Phone call appointment type"
+  },
+  "bookNewAppointmentButton": "Request Appointment",
+  "@bookNewAppointmentButton": {
+    "description": "Request appointment button text"
+  },
+  "bookWithLabel": "Book with {name}",
+  "@bookWithLabel": {
+    "description": "Book counsellor with name",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "cancelLabel": "Cancel",
+  "@cancelLabel": {
+    "description": "Cancel button text"
+  },
+  "appointmentCanceled": "Cancel",
+  "@appointmentCanceled": {
+    "description": "Cancel button label"
+  },
+  "closeLabel": "Close",
+  "@closeLabel": {
+    "description": "Close button label"
+  },
+  "helpSupport": "Help & Support",
+  "@helpSupport": {
+    "description": "Help and support section"
+  },
+  "contactUs": "Contact Us",
+  "@contactUs": {
+    "description": "Contact us link"
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "Feedback link"
+  },
+  "rateApp": "Rate App",
+  "@rateApp": {
+    "description": "Rate app link"
+  }
+}
