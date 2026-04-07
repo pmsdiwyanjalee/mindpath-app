@@ -127,7 +127,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: accentLight,
           borderRadius: BorderRadius.circular(20),
@@ -135,29 +135,32 @@ class _DashboardScreenState extends State<DashboardScreen>
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 44,
-              height: 44,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 color: accent,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: Colors.white, size: 22),
+              child: Icon(icon, color: Colors.white, size: 20),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             Text(
               title,
               style: TextStyle(
                 color: _textDark,
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
+                height: 1.2,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               subtitle,
-              style: TextStyle(color: _textMid, fontSize: 11.5),
+              style: TextStyle(color: _textMid, fontSize: 10),
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -1236,7 +1239,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                           physics: const NeverScrollableScrollPhysics(),
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                          childAspectRatio: 0.9,
+                          childAspectRatio: 1.05,
                           children: [
                             _buildActionCard(
                               icon: Icons.chat_rounded,
