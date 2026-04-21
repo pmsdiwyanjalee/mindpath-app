@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'counsellors_screen.dart'; // Import the counsellors screen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -33,7 +34,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   // ── Daily check-in / mood history ─────────────────────────────────────────
   bool _todayCheckedIn = false;
   final List<Map<String, String>> _moodHistory = [];
-  // e.g. {'date': 'Apr 21', 'mood': 'Great', 'emoji': '😊', 'time': '09:30 AM'}
 
   // ── Palette ───────────────────────────────────────────────────────────────
   static const Color _bg         = Color(0xFFF6F4F0);
@@ -54,7 +54,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   static const Color _goldLight  = Color(0xFFFDF3CC);
 
   // ── Rank System ───────────────────────────────────────────────────────────
-  // Each rank has: minDays, name, emoji, gradient colors, description
   static const List<Map<String, dynamic>> _ranks = [
     {
       'minDays': 0,
@@ -210,15 +209,12 @@ class _DashboardScreenState extends State<DashboardScreen>
     }
   }
 
-  // ── Save Mood ─────────────────────────────────────────────────────────────
-
   void _saveMood() {
     if (_selectedMood == null) return;
 
     final moodEmojis = {'Great': '😊', 'Okay': '😐', 'Struggling': '😔', 'Need Help': '😢'};
 
     setState(() {
-      // Remove today's entry if already exists (update instead)
       _moodHistory.removeWhere((m) => m['date'] == _todayLabel());
       _moodHistory.insert(0, {
         'date': _todayLabel(),
@@ -235,7 +231,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   void _showMoodSavedSheet() {
     final mood  = _selectedMood!;
     final color = _moodColor(mood);
-    final light = color.withOpacity(0.12);
     final moodEmojis = {'Great': '😊', 'Okay': '😐', 'Struggling': '😔', 'Need Help': '😢'};
     final emoji = moodEmojis[mood] ?? '😊';
 
@@ -288,7 +283,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   textAlign: TextAlign.center),
             ),
             const SizedBox(height: 16),
-            // Check-in streak
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(color: _sageLight, borderRadius: BorderRadius.circular(14)),
@@ -335,8 +329,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  // ── Rank Badge Sheet ──────────────────────────────────────────────────────
-
   void _showRankSheet() {
     final rank = _currentRank;
     final next = _nextRank;
@@ -361,7 +353,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   margin: const EdgeInsets.only(bottom: 20),
                   decoration: BoxDecoration(color: _border, borderRadius: BorderRadius.circular(2)))),
 
-              // Badge hero
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 32),
@@ -386,7 +377,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   textAlign: TextAlign.center),
               const SizedBox(height: 20),
 
-              // Progress to next rank
               if (next != null) ...[
                 Container(
                   padding: const EdgeInsets.all(16),
@@ -432,7 +422,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 const SizedBox(height: 16),
               ],
 
-              // All ranks ladder
               const Text('Rank Ladder', style: TextStyle(color: _textDark, fontSize: 16, fontWeight: FontWeight.w700)),
               const SizedBox(height: 12),
               ..._ranks.asMap().entries.map((e) {
@@ -487,8 +476,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       ),
     );
   }
-
-  // ── Mood History Sheet ────────────────────────────────────────────────────
 
   void _showMoodHistorySheet() {
     showModalBottomSheet(
@@ -571,8 +558,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       ),
     );
   }
-
-  // ── Edit Sobriety Date ────────────────────────────────────────────────────
 
   void _showEditSobrietySheet() {
     DateTime tempDate = _sobrietyStart;
@@ -691,8 +676,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       ),
     );
   }
-
-  // ── Other dialogs ─────────────────────────────────────────────────────────
 
   void _showMilestoneDetails(String milestone, bool achieved) {
     showModalBottomSheet(
@@ -871,8 +854,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  // ── Helper Widgets ────────────────────────────────────────────────────────
-
   Widget _card({required Widget child, EdgeInsets? padding, Color? color}) => Container(
     padding: padding ?? const EdgeInsets.all(20),
     decoration: BoxDecoration(
@@ -970,8 +951,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  // ── Drawer ────────────────────────────────────────────────────────────────
-
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
       backgroundColor: _surface,
@@ -997,6 +976,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           _buildDrawerItem(context, Icons.warning_rounded, 'Craving Tracker', '/cravings'),
           _buildDrawerItem(context, Icons.calendar_today_rounded, 'Appointments', '/appointments'),
           _buildDrawerItem(context, Icons.chat_rounded, 'Chat with Counsellor', '/chat'),
+          _buildDrawerItem(context, Icons.medical_services_rounded, 'Our Counsellors', '/counsellors'), // Updated to navigate to counsellors screen
           _buildDrawerItem(context, Icons.library_books_rounded, 'Resources', '/resources'),
           Padding(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), child: Divider(color: _border)),
           _buildDrawerItem(context, Icons.health_and_safety_rounded, 'Wellness & Health', '/wellness'),
@@ -1027,13 +1007,17 @@ class _DashboardScreenState extends State<DashboardScreen>
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       onTap: () {
         Navigator.pop(context);
-        if (!isLogout) setState(() => _activeRoute = route);
-        if (isLogout) { Navigator.pushReplacementNamed(context, route); } else { Navigator.pushNamed(context, route); }
+        if (route == '/counsellors') {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => const CounsellorsScreen()));
+        } else if (!isLogout) {
+          setState(() => _activeRoute = route);
+          Navigator.pushNamed(context, route);
+        } else {
+          Navigator.pushReplacementNamed(context, route);
+        }
       },
     );
   }
-
-  // ── Build ─────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
@@ -1053,7 +1037,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       onDrawerChanged: (isOpened) => setState(() => _isDrawerOpen = isOpened),
       body: CustomScrollView(
         slivers: [
-          // ── App Bar ──────────────────────────────────────────────────────
           SliverAppBar(
             expandedHeight: 180,
             pinned: true,
@@ -1109,8 +1092,6 @@ class _DashboardScreenState extends State<DashboardScreen>
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 20, 16, 40),
               child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-
-                // ── Stats Row ────────────────────────────────────────────
                 GestureDetector(
                   onTap: _showEditSobrietySheet,
                   child: _card(child: Column(children: [
@@ -1131,7 +1112,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ── RANK BADGE ────────────────────────────────────────────
                 GestureDetector(
                   onTap: _showRankSheet,
                   child: ScaleTransition(
@@ -1144,7 +1124,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                         boxShadow: [BoxShadow(color: rankColors[0].withOpacity(0.35), blurRadius: 20, offset: const Offset(0, 6))],
                       ),
                       child: Row(children: [
-                        // Badge icon
                         Container(
                           width: 64, height: 64,
                           decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
@@ -1156,7 +1135,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                           const SizedBox(height: 2),
                           Text(rank['name'] as String, style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800)),
                           const SizedBox(height: 8),
-                          // Progress to next rank
                           if (_nextRank != null) ...[
                             ClipRRect(
                               borderRadius: BorderRadius.circular(6),
@@ -1183,7 +1161,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ── Sobriety Journey ──────────────────────────────────────
                 _card(child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                     Row(children: [
@@ -1219,7 +1196,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ])),
                 const SizedBox(height: 16),
 
-                // ── Daily Affirmation ─────────────────────────────────────
                 GestureDetector(
                   onTap: _refreshAffirmation,
                   child: Container(
@@ -1243,7 +1219,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 const SizedBox(height: 16),
 
-                // ── Daily Check-in ────────────────────────────────────────
                 _card(child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                     Row(children: [
@@ -1251,7 +1226,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                       const SizedBox(width: 10),
                       _sectionLabel('Daily Check-in'),
                     ]),
-                    // History button
                     GestureDetector(
                       onTap: _showMoodHistorySheet,
                       child: Container(
@@ -1267,7 +1241,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                   ]),
 
                   if (_todayCheckedIn) ...[
-                    // Already checked in today
                     const SizedBox(height: 14),
                     Container(
                       padding: const EdgeInsets.all(14),
@@ -1288,7 +1261,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                       ]),
                     ),
                   ] else ...[
-                    // Not yet checked in
                     const SizedBox(height: 12),
                     Text('How are you feeling today?', style: TextStyle(color: _textMid, fontSize: 13.5)),
                     const SizedBox(height: 14),
@@ -1328,7 +1300,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ])),
                 const SizedBox(height: 16),
 
-                // ── Quick Actions ─────────────────────────────────────────
                 _card(child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                   Row(children: [
                     Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: _peachLight, borderRadius: BorderRadius.circular(10)), child: Icon(Icons.grid_view_rounded, color: _peach, size: 18)),
@@ -1354,7 +1325,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ])),
                 const SizedBox(height: 16),
 
-                // ── Upcoming Sessions ─────────────────────────────────────
                 _card(child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                   Row(children: [
                     Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: _lavLight, borderRadius: BorderRadius.circular(10)), child: Icon(Icons.event_rounded, color: _lavender, size: 18)),
@@ -1379,8 +1349,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 }
-
-// ── Bottom Sheet helper ────────────────────────────────────────────────────────
 
 class _BottomSheet extends StatelessWidget {
   final String title;
