@@ -20,6 +20,16 @@ class _DashboardScreenState extends State<DashboardScreen>
   late Animation<double> _pulseAnimation;
   late Animation<double> _fadeAnimation;
 
+  // ── Dynamic Stats ────────────────────────────────────────────────────────
+  int _soberDays = 47;
+  int _currentStreak = 47;
+  int _totalSessions = 3;
+  double _sobrietyProgress = 0.47; // 47 out of 100 days to next milestone
+  final int _nextMilestoneDays = 100;
+  
+  // Track if stats have been updated today to prevent multiple increments
+  bool _statsUpdatedToday = false;
+
   // ── Palette ──────────────────────────────────────────────────────────────
   static const Color _bg         = Color(0xFFF6F4F0);        // warm off-white
   static const Color _surface    = Color(0xFFFFFFFF);
@@ -52,6 +62,9 @@ class _DashboardScreenState extends State<DashboardScreen>
   void initState() {
     super.initState();
     _currentAffirmation = _affirmations[0];
+    
+    // Check if we need to update stats for a new day
+    _checkAndUpdateDailyStats();
 
     _pulseController = AnimationController(
       vsync: this,
@@ -75,6 +88,101 @@ class _DashboardScreenState extends State<DashboardScreen>
     super.dispose();
   }
 
+  // ── Daily Stats Update Logic ─────────────────────────────────────────────
+  void _checkAndUpdateDailyStats() {
+    // Get last update date from persistent storage (using shared_preferences is better)
+    // For this demo, we'll use a simple approach - check if we have a stored date
+    // In a real app, use SharedPreferences or a database
+    
+    // For demo purposes, we'll simulate a daily update check
+    // In production, you would store the last update date and compare with today
+    final lastUpdateDate = _getLastUpdateDate();
+    final today = DateTime.now().toIso8601String().split('T')[0];
+    
+    if (lastUpdateDate != today && !_statsUpdatedToday) {
+      _updateDailyStats();
+      _statsUpdatedToday = true;
+    }
+  }
+  
+  String _getLastUpdateDate() {
+    // This is a mock - in real app, retrieve from SharedPreferences
+    // For demo, we'll return a string that can be set
+    // You can implement actual persistence using shared_preferences package
+    return '';
+  }
+  
+  void _updateDailyStats() {
+    setState(() {
+      _soberDays++;
+      _currentStreak++;
+      _sobrietyProgress = _soberDays / _nextMilestoneDays;
+      
+      // Save the update date (in real app, save to SharedPreferences)
+      // _saveLastUpdateDate(DateTime.now().toIso8601String().split('T')[0]);
+    });
+    
+    // Show a congratulatory message for the new milestone
+    if (_soberDays == 30 || _soberDays == 60 || _soberDays == 100 || 
+        _soberDays == 180 || _soberDays == 365) {
+      _showMilestoneCelebration(_soberDays);
+    }
+  }
+  
+  void _showMilestoneCelebration(int days) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        backgroundColor: _surface,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: _sageLight,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.celebration_rounded, color: _sage, size: 48),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '🎉 Milestone Unlocked! 🎉',
+              style: TextStyle(
+                color: _sage,
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '$_soberDays Days Sober!',
+              style: TextStyle(
+                color: _textDark,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Congratulations on reaching this incredible milestone. Your dedication is truly inspiring!',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: _textMid, fontSize: 14),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text('Celebrate', style: TextStyle(color: _sage, fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _refreshAffirmation() {
     final random = math.Random().nextInt(_affirmations.length);
     _fadeController.reset();
@@ -82,6 +190,100 @@ class _DashboardScreenState extends State<DashboardScreen>
       _currentAffirmation = _affirmations[random];
     });
     _fadeController.forward();
+  }
+
+  // ── Manual Stats Update Methods ──────────────────────────────────────────
+  void _incrementSoberDays() {
+    setState(() {
+      _soberDays++;
+      _currentStreak++;
+      _sobrietyProgress = _soberDays / _nextMilestoneDays;
+    });
+    _showStatsUpdateSnackbar('Sober day added! You\'re at $_soberDays days.');
+    
+    // Check for milestone
+    if (_soberDays == 30 || _soberDays == 60 || _soberDays == 100 || 
+        _soberDays == 180 || _soberDays == 365) {
+      _showMilestoneCelebration(_soberDays);
+    }
+  }
+  
+  void _incrementSessions() {
+    setState(() {
+      _totalSessions++;
+    });
+    _showStatsUpdateSnackbar('Session logged! Total sessions: $_totalSessions');
+  }
+  
+  void _resetStreak() {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        backgroundColor: _surface,
+        title: Text('Reset Streak?', style: TextStyle(color: _peach, fontWeight: FontWeight.bold)),
+        content: Text(
+          'Resetting your streak will set your current streak to 0 while keeping your total sober days. Are you sure?',
+          style: TextStyle(color: _textMid),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text('Cancel', style: TextStyle(color: _textMid)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _currentStreak = 0;
+              });
+              Navigator.pop(ctx);
+              _showStatsUpdateSnackbar('Streak has been reset to 0. Keep going!');
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _peach,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+            child: const Text('Reset Streak'),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  void _editStats() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (ctx) => _StatsEditBottomSheet(
+        soberDays: _soberDays,
+        currentStreak: _currentStreak,
+        totalSessions: _totalSessions,
+        onSave: (newSoberDays, newStreak, newSessions) {
+          setState(() {
+            _soberDays = newSoberDays;
+            _currentStreak = newStreak;
+            _totalSessions = newSessions;
+            _sobrietyProgress = _soberDays / _nextMilestoneDays;
+          });
+          Navigator.pop(ctx);
+          _showStatsUpdateSnackbar('Stats updated successfully!');
+        },
+      ),
+    );
+  }
+  
+  void _showStatsUpdateSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: _sage,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 
   // ── Reusable Widgets ─────────────────────────────────────────────────────
@@ -292,23 +494,26 @@ class _DashboardScreenState extends State<DashboardScreen>
     );
   }
 
-  // ── Stat Pill ─────────────────────────────────────────────────────────────
+  // ── Stat Pill with Edit Support ───────────────────────────────────────────
 
-  Widget _statPill(String value, String label, Color color) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: TextStyle(
-            color: color,
-            fontSize: 26,
-            fontWeight: FontWeight.w800,
-            height: 1,
+  Widget _statPill(String value, String label, Color color, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: TextStyle(
+              color: color,
+              fontSize: 26,
+              fontWeight: FontWeight.w800,
+              height: 1,
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(label, style: TextStyle(color: _textMid, fontSize: 12)),
-      ],
+          const SizedBox(height: 4),
+          Text(label, style: TextStyle(color: _textMid, fontSize: 12)),
+        ],
+      ),
     );
   }
 
@@ -440,6 +645,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(ctx);
+                      _incrementSessions(); // Increment sessions when confirming a session
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Session confirmed!')),
                       );
@@ -784,15 +990,15 @@ class _DashboardScreenState extends State<DashboardScreen>
                     const SizedBox(width: 14),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Alex Thompson',
+                      children: [
+                        const Text('Alex Thompson',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,
                               fontWeight: FontWeight.w700,
                             )),
-                        SizedBox(height: 4),
-                        Text('47 Days Sober 🌱',
+                        const SizedBox(height: 4),
+                        Text('$_soberDays Days Sober 🌱',
                             style: TextStyle(
                                 color: Colors.white70, fontSize: 13)),
                       ],
@@ -925,6 +1131,11 @@ class _DashboardScreenState extends State<DashboardScreen>
                 onPressed: () => Navigator.pushNamed(context, '/notifications'),
               ),
               IconButton(
+                icon: Icon(Icons.edit_note_rounded, color: _textDark),
+                onPressed: _editStats,
+                tooltip: 'Edit Stats',
+              ),
+              IconButton(
                 icon: Icon(Icons.logout_rounded, color: _textDark),
                 onPressed: () => Navigator.pushReplacementNamed(context, '/'),
               ),
@@ -963,15 +1174,15 @@ class _DashboardScreenState extends State<DashboardScreen>
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Welcome Back, Alex',
+                          children: [
+                            const Text('Welcome Back, Alex',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 19,
                                   fontWeight: FontWeight.w800,
                                 )),
-                            SizedBox(height: 4),
-                            Text('One day at a time — you\'re doing amazing 🌿',
+                            const SizedBox(height: 4),
+                            Text('$_soberDays days strong — you\'re doing amazing 🌿',
                                 style: TextStyle(
                                     color: Colors.white70, fontSize: 12.5)),
                           ],
@@ -991,20 +1202,47 @@ class _DashboardScreenState extends State<DashboardScreen>
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
 
-                  // ── Stats Row ──────────────────────────────────────────
+                  // ── Stats Row with Edit Actions ─────────────────────────
                   _card(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _statPill('47', 'Days Sober', _sage),
+                        _statPill(
+                          '$_soberDays', 
+                          'Days Sober', 
+                          _sage,
+                          onTap: _incrementSoberDays,
+                        ),
                         Container(width: 1, height: 40, color: _border),
-                        _statPill('47', 'Day Streak', _teal),
+                        GestureDetector(
+                          onLongPress: _resetStreak,
+                          child: _statPill(
+                            '$_currentStreak', 
+                            'Day Streak', 
+                            _teal,
+                          ),
+                        ),
                         Container(width: 1, height: 40, color: _border),
-                        _statPill('3', 'Sessions', _lavender),
+                        _statPill(
+                          '$_totalSessions', 
+                          'Sessions', 
+                          _lavender,
+                          onTap: _incrementSessions,
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 16),
+                  
+                  // Hint text for stats interaction
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, bottom: 4),
+                    child: Text(
+                      '💡 Tap "Days Sober" or "Sessions" to add • Long press "Day Streak" to reset',
+                      style: TextStyle(color: _textLight, fontSize: 10),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
 
                   // ── Sobriety Journey ───────────────────────────────────
                   _card(
@@ -1036,7 +1274,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 color: _sageLight,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Text('47%',
+                              child: Text('${(_sobrietyProgress * 100).toInt()}%',
                                   style: TextStyle(
                                     color: _sage,
                                     fontSize: 12,
@@ -1049,24 +1287,26 @@ class _DashboardScreenState extends State<DashboardScreen>
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: LinearProgressIndicator(
-                            value: 0.47,
+                            value: _sobrietyProgress.clamp(0.0, 1.0),
                             color: _sage,
                             backgroundColor: _sageLight,
                             minHeight: 10,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Text('47 of 100 days to your next milestone',
+                        Text('$_soberDays of $_nextMilestoneDays days to your next milestone',
                             style: TextStyle(color: _textMid, fontSize: 12.5)),
                         const SizedBox(height: 14),
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            _buildMilestoneChip('7 Days', true),
-                            _buildMilestoneChip('30 Days', true),
-                            _buildMilestoneChip('60 Days', false),
-                            _buildMilestoneChip('100 Days', false),
+                            _buildMilestoneChip('7 Days', _soberDays >= 7),
+                            _buildMilestoneChip('30 Days', _soberDays >= 30),
+                            _buildMilestoneChip('60 Days', _soberDays >= 60),
+                            _buildMilestoneChip('100 Days', _soberDays >= 100),
+                            _buildMilestoneChip('180 Days', _soberDays >= 180),
+                            _buildMilestoneChip('365 Days', _soberDays >= 365),
                           ],
                         ),
                       ],
@@ -1081,7 +1321,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [_lavender, Color(0xFF7B6DB0)],
+                          colors: [_lavender, const Color(0xFF7B6DB0)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -1283,12 +1523,12 @@ class _DashboardScreenState extends State<DashboardScreen>
                               onTap: () => _showCrisisSupportDialog(context),
                             ),
                             _buildActionCard(
-                              icon: Icons.settings_rounded,
-                              title: 'Settings',
-                              subtitle: 'Preferences',
+                              icon: Icons.edit_note_rounded,
+                              title: 'Edit\nStats',
+                              subtitle: 'Update data',
                               accent: _textMid,
                               accentLight: _bg,
-                              onTap: () => _showSettingsDialog(context),
+                              onTap: _editStats,
                             ),
                           ],
                         ),
@@ -1402,6 +1642,122 @@ class _BottomSheet extends StatelessWidget {
           const SizedBox(height: 16),
           child,
         ],
+      ),
+    );
+  }
+}
+
+// ── Stats Edit Bottom Sheet ──────────────────────────────────────────────────
+
+class _StatsEditBottomSheet extends StatefulWidget {
+  final int soberDays;
+  final int currentStreak;
+  final int totalSessions;
+  final Function(int, int, int) onSave;
+
+  const _StatsEditBottomSheet({
+    required this.soberDays,
+    required this.currentStreak,
+    required this.totalSessions,
+    required this.onSave,
+  });
+
+  @override
+  State<_StatsEditBottomSheet> createState() => _StatsEditBottomSheetState();
+}
+
+class _StatsEditBottomSheetState extends State<_StatsEditBottomSheet> {
+  late TextEditingController _soberController;
+  late TextEditingController _streakController;
+  late TextEditingController _sessionsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _soberController = TextEditingController(text: widget.soberDays.toString());
+    _streakController = TextEditingController(text: widget.currentStreak.toString());
+    _sessionsController = TextEditingController(text: widget.totalSessions.toString());
+  }
+
+  @override
+  void dispose() {
+    _soberController.dispose();
+    _streakController.dispose();
+    _sessionsController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _BottomSheet(
+      title: 'Edit Recovery Stats',
+      child: Column(
+        children: [
+          _buildStatField('Total Sober Days', _soberController, Icons.calendar_today),
+          const SizedBox(height: 12),
+          _buildStatField('Current Streak', _streakController, Icons.local_fire_department),
+          const SizedBox(height: 12),
+          _buildStatField('Total Sessions', _sessionsController, Icons.video_call),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF6B7280),
+                    side: const BorderSide(color: Color(0xFFE8E5E0)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: const Text('Cancel'),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    final sober = int.tryParse(_soberController.text) ?? 0;
+                    final streak = int.tryParse(_streakController.text) ?? 0;
+                    final sessions = int.tryParse(_sessionsController.text) ?? 0;
+                    widget.onSave(sober, streak, sessions);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF7CA982),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    elevation: 0,
+                  ),
+                  child: const Text('Save Changes'),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatField(String label, TextEditingController controller, IconData icon) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F4F0),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE8E5E0)),
+      ),
+      child: TextField(
+        controller: controller,
+        keyboardType: TextInputType.number,
+        style: const TextStyle(color: Color(0xFF2D3142), fontSize: 16, fontWeight: FontWeight.w600),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(color: Color(0xFF6B7280), fontSize: 13),
+          prefixIcon: Icon(icon, color: const Color(0xFF4A9EAF), size: 20),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 12),
+        ),
       ),
     );
   }
