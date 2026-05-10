@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CravingTrackerScreen extends StatefulWidget {
-  const CravingTrackerScreen({Key? key}) : super(key: key);
+  const CravingTrackerScreen({super.key});
 
   @override
   State<CravingTrackerScreen> createState() => _CravingTrackerScreenState();
@@ -23,9 +23,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
   static const Color _peach      = Color(0xFFE8926A);
   static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
-  static const Color _lavLight   = Color(0xFFEAE6F5);
   static const Color _gold       = Color(0xFFF4C542);
-  static const Color _goldLight  = Color(0xFFFDF3CC);
   static const Color _textDark   = Color(0xFF2D3142);
   static const Color _textMid    = Color(0xFF6B7280);
   static const Color _textLight  = Color(0xFF9CA3AF);
@@ -123,7 +121,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
               margin: const EdgeInsets.only(right: 2),
               decoration: BoxDecoration(
                 color: filled
-                    ? _intensityColor(intensity).withOpacity(_barAnim.value)
+                    ? _intensityColor(intensity).withValues(alpha: _barAnim.value)
                     : _border,
                 borderRadius: BorderRadius.circular(height / 2),
               ),
@@ -205,9 +203,9 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: iColor.withOpacity(0.08),
+                color: iColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: iColor.withOpacity(0.2)),
+                border: Border.all(color: iColor.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,7 +244,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
           Container(
             width: 36, height: 36,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 18),
@@ -468,7 +466,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
                   decoration: BoxDecoration(
                     color: _peachLight,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: _peach.withOpacity(0.2)),
+                    border: Border.all(color: _peach.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -588,7 +586,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 18,
               offset: const Offset(0, 4),
             ),
@@ -676,7 +674,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: _sage.withOpacity(0.3),
+                      color: _sage.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),
@@ -783,7 +781,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: _peach.withOpacity(0.35),
+                        color: _peach.withValues(alpha: 0.35),
                         blurRadius: 16,
                         offset: const Offset(0, 6),
                       ),
@@ -794,7 +792,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.warning_rounded,
@@ -968,7 +966,7 @@ class _CravingTrackerScreenState extends State<CravingTrackerScreen>
   Widget _strategyRow(Map<String, dynamic> s) {
     final color = s['color'] as Color;
     final light = Color.alphaBlend(
-        color.withOpacity(0.12), Colors.white);
+        color.withValues(alpha: 0.12), Colors.white);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(

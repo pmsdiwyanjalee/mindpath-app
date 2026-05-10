@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class CounsellorsScreen extends StatefulWidget {
-  const CounsellorsScreen({Key? key}) : super(key: key);
+  const CounsellorsScreen({super.key});
 
   @override
   State<CounsellorsScreen> createState() => _CounsellorsScreenState();
@@ -13,11 +13,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
   // List of counsellors (mutable)
   List<Map<String, dynamic>> _counsellors = [];
   List<Map<String, dynamic>> _filteredCounsellors = [];
-  
+
   // Search controller
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
-  
+
   // Form controllers for add/edit
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -29,18 +29,16 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
   final _availabilityController = TextEditingController();
   final _ratingController = TextEditingController();
   final _reviewsController = TextEditingController();
-  
+
   List<String> _specialties = [];
   List<String> _languages = [];
-  
-  String _selectedSpecialty = '';
-  String _selectedLanguage = '';
+
   Color _selectedColor = const Color(0xFF7CA982);
   IconData _selectedIcon = Icons.person_rounded;
-  
+
   // Current editing counsellor ID
   int? _editingId;
-  
+
   // Available colors for counsellors
   final List<Color> _availableColors = [
     const Color(0xFF7CA982),
@@ -50,7 +48,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     const Color(0xFFF4C542),
     const Color(0xFFD94F4F),
   ];
-  
+
   // Available icons
   final List<IconData> _availableIcons = [
     Icons.person_rounded,
@@ -73,9 +71,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
   static const Color _teal = Color(0xFF4A9EAF);
   static const Color _tealLight = Color(0xFFD6EEF3);
   static const Color _peach = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender = Color(0xFF9B8EC4);
-  static const Color _lavLight = Color(0xFFEAE6F5);
 
   @override
   void initState() {
@@ -104,18 +100,23 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       List<Map<String, dynamic>> counsellorsToSave = [];
-      
+
       for (var counsellor in _counsellors) {
         // Convert Color to integer for storage
         Map<String, dynamic> copy = Map.from(counsellor);
-        copy['color'] = (counsellor['color'] as Color).value;
+        final color = counsellor['color'] as Color;
+        copy['color'] = (color.a.toInt() << 24) |
+            (color.r.toInt() << 16) |
+            (color.g.toInt() << 8) |
+            color.b.toInt();
         copy['imageIcon'] = _iconToIndex(counsellor['imageIcon']);
         counsellorsToSave.add(copy);
       }
-      
+
       final String encodedData = json.encode(counsellorsToSave);
       await prefs.setString('counsellors_data', encodedData);
-      debugPrint('Counsellors saved successfully: ${_counsellors.length} counsellors');
+      debugPrint(
+          'Counsellors saved successfully: ${_counsellors.length} counsellors');
     } catch (e) {
       debugPrint('Error saving counsellors: $e');
     }
@@ -126,31 +127,34 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       final String? encodedData = prefs.getString('counsellors_data');
-      
+
       if (encodedData != null) {
         List<dynamic> decodedList = json.decode(encodedData);
         _counsellors = decodedList.map((item) {
           Map<String, dynamic> counsellor = Map<String, dynamic>.from(item);
-          
+
           // Convert integer back to Color
           counsellor['color'] = Color(counsellor['color']);
-          
+
           // Convert icon index back to IconData
           counsellor['imageIcon'] = _indexToIcon(counsellor['imageIcon']);
-          
+
           // FIX: Convert specialties from List<dynamic> to List<String>
           if (counsellor['specialties'] != null) {
-            counsellor['specialties'] = List<String>.from(counsellor['specialties']);
+            counsellor['specialties'] =
+                List<String>.from(counsellor['specialties']);
           }
-          
+
           // FIX: Convert languages from List<dynamic> to List<String>
           if (counsellor['languages'] != null) {
-            counsellor['languages'] = List<String>.from(counsellor['languages']);
+            counsellor['languages'] =
+                List<String>.from(counsellor['languages']);
           }
-          
+
           return counsellor;
         }).toList();
-        debugPrint('Counsellors loaded successfully: ${_counsellors.length} counsellors');
+        debugPrint(
+            'Counsellors loaded successfully: ${_counsellors.length} counsellors');
       } else {
         // Initialize with default counsellors if no saved data
         _initializeDefaultCounsellors();
@@ -160,7 +164,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
       debugPrint('Error loading counsellors: $e');
       _initializeDefaultCounsellors();
     }
-    
+
     setState(() {
       _filteredCounsellors = List.from(_counsellors);
     });
@@ -193,9 +197,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'specialties': ['Substance Abuse', 'Anxiety', 'Trauma'],
         'experience': '12+ years',
         'languages': ['English', 'Spanish'],
-        'bio': 'Dr. Johnson specializes in evidence-based treatments for addiction recovery, including CBT and motivational interviewing. She has helped hundreds of individuals achieve lasting sobriety.',
+        'bio':
+            'Dr. Johnson specializes in evidence-based treatments for addiction recovery, including CBT and motivational interviewing. She has helped hundreds of individuals achieve lasting sobriety.',
         'education': 'Ph.D. in Clinical Psychology - Stanford University',
-        'certifications': 'Certified Addiction Specialist (CAS), Licensed Clinical Psychologist',
+        'certifications':
+            'Certified Addiction Specialist (CAS), Licensed Clinical Psychologist',
         'availability': 'Mon, Wed, Fri: 9 AM - 5 PM',
         'rating': 4.9,
         'reviews': 128,
@@ -206,12 +212,18 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': 2,
         'name': 'Michael Chen, LCSW',
         'title': 'Licensed Clinical Social Worker',
-        'specialties': ['Dual Diagnosis', 'Family Therapy', 'Relapse Prevention'],
+        'specialties': [
+          'Dual Diagnosis',
+          'Family Therapy',
+          'Relapse Prevention'
+        ],
         'experience': '8+ years',
         'languages': ['English', 'Mandarin'],
-        'bio': 'Michael brings a compassionate, client-centered approach to recovery. He specializes in working with individuals facing co-occurring mental health conditions.',
+        'bio':
+            'Michael brings a compassionate, client-centered approach to recovery. He specializes in working with individuals facing co-occurring mental health conditions.',
         'education': 'Master of Social Work - University of Michigan',
-        'certifications': 'Licensed Clinical Social Worker (LCSW), Certified Clinical Trauma Professional',
+        'certifications':
+            'Licensed Clinical Social Worker (LCSW), Certified Clinical Trauma Professional',
         'availability': 'Tue, Thu: 10 AM - 7 PM, Sat: 9 AM - 1 PM',
         'rating': 4.8,
         'reviews': 94,
@@ -222,12 +234,18 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': 3,
         'name': 'Dr. Emily Rodriguez',
         'title': 'Psychiatrist & Addiction Medicine',
-        'specialties': ['Medication Management', 'Co-occurring Disorders', 'Crisis Intervention'],
+        'specialties': [
+          'Medication Management',
+          'Co-occurring Disorders',
+          'Crisis Intervention'
+        ],
         'experience': '15+ years',
         'languages': ['English', 'Portuguese'],
-        'bio': 'Dr. Rodriguez is board-certified in both Psychiatry and Addiction Medicine. She offers medication-assisted treatment alongside therapeutic support.',
+        'bio':
+            'Dr. Rodriguez is board-certified in both Psychiatry and Addiction Medicine. She offers medication-assisted treatment alongside therapeutic support.',
         'education': 'M.D. - Johns Hopkins University School of Medicine',
-        'certifications': 'Board Certified in Psychiatry and Addiction Medicine',
+        'certifications':
+            'Board Certified in Psychiatry and Addiction Medicine',
         'availability': 'Mon-Thu: 8 AM - 4 PM',
         'rating': 4.95,
         'reviews': 203,
@@ -238,12 +256,18 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': 4,
         'name': 'David Okonkwo, MA',
         'title': 'Certified Addiction Counselor',
-        'specialties': ['Recovery Coaching', 'Life Skills', 'Motivation Enhancement'],
+        'specialties': [
+          'Recovery Coaching',
+          'Life Skills',
+          'Motivation Enhancement'
+        ],
         'experience': '10+ years',
         'languages': ['English', 'Igbo'],
-        'bio': 'David is a person in long-term recovery who brings lived experience to his counseling approach. He specializes in helping clients build meaningful lives in sobriety.',
+        'bio':
+            'David is a person in long-term recovery who brings lived experience to his counseling approach. He specializes in helping clients build meaningful lives in sobriety.',
         'education': 'M.A. in Counseling Psychology - Loyola University',
-        'certifications': 'Certified Alcohol and Drug Counselor (CADC), Peer Recovery Specialist',
+        'certifications':
+            'Certified Alcohol and Drug Counselor (CADC), Peer Recovery Specialist',
         'availability': 'Mon-Fri: 12 PM - 8 PM',
         'rating': 4.85,
         'reviews': 156,
@@ -254,12 +278,18 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': 5,
         'name': 'Dr. Lisa Thompson',
         'title': 'Clinical Psychologist',
-        'specialties': ['Cognitive Behavioral Therapy', 'Mindfulness', 'Stress Management'],
+        'specialties': [
+          'Cognitive Behavioral Therapy',
+          'Mindfulness',
+          'Stress Management'
+        ],
         'experience': '9+ years',
         'languages': ['English'],
-        'bio': 'Dr. Thompson integrates mindfulness-based approaches with traditional CBT to help clients develop healthier coping mechanisms and reduce relapse risk.',
+        'bio':
+            'Dr. Thompson integrates mindfulness-based approaches with traditional CBT to help clients develop healthier coping mechanisms and reduce relapse risk.',
         'education': 'Psy.D. in Clinical Psychology - Rutgers University',
-        'certifications': 'Licensed Psychologist, Certified Mindfulness-Based Stress Reduction Instructor',
+        'certifications':
+            'Licensed Psychologist, Certified Mindfulness-Based Stress Reduction Instructor',
         'availability': 'Tue, Wed, Thu: 9 AM - 6 PM',
         'rating': 4.9,
         'reviews': 112,
@@ -270,12 +300,18 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': 6,
         'name': 'Rachel Green, LPC',
         'title': 'Licensed Professional Counselor',
-        'specialties': ['Young Adult Recovery', 'Relationship Issues', 'Self-Esteem'],
+        'specialties': [
+          'Young Adult Recovery',
+          'Relationship Issues',
+          'Self-Esteem'
+        ],
         'experience': '7+ years',
         'languages': ['English', 'French'],
-        'bio': 'Rachel specializes in working with young adults navigating recovery while managing career, relationships, and identity development.',
+        'bio':
+            'Rachel specializes in working with young adults navigating recovery while managing career, relationships, and identity development.',
         'education': 'M.Ed. in Counseling - University of Pennsylvania',
-        'certifications': 'Licensed Professional Counselor (LPC), Certified in TEAM-CBT',
+        'certifications':
+            'Licensed Professional Counselor (LPC), Certified in TEAM-CBT',
         'availability': 'Mon, Wed, Fri: 11 AM - 7 PM',
         'rating': 4.75,
         'reviews': 87,
@@ -294,7 +330,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         _filteredCounsellors = _counsellors.where((counsellor) {
           return counsellor['name'].toLowerCase().contains(_searchQuery) ||
               counsellor['title'].toLowerCase().contains(_searchQuery) ||
-              (counsellor['specialties'] as List<String>).any((s) => s.toLowerCase().contains(_searchQuery));
+              (counsellor['specialties'] as List<String>)
+                  .any((s) => s.toLowerCase().contains(_searchQuery));
         }).toList();
       }
     });
@@ -330,7 +367,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('Delete Counsellor'),
-        content: Text('Are you sure you want to delete ${counsellor['name']}? This action cannot be undone.'),
+        content: Text(
+            'Are you sure you want to delete ${counsellor['name']}? This action cannot be undone.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
@@ -342,8 +380,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                 _counsellors.removeWhere((c) => c['id'] == counsellor['id']);
                 _filterCounsellors();
               });
-              await _saveCounsellors(); // Save after deletion
               Navigator.pop(ctx);
+              await _saveCounsellors(); // Save after deletion
+              if (!mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Counsellor deleted successfully'),
@@ -365,7 +404,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         'id': _editingId ?? DateTime.now().millisecondsSinceEpoch,
         'name': _nameController.text,
         'title': _titleController.text,
-        'specialties': List<String>.from(_specialties), // Ensure it's List<String>
+        'specialties':
+            List<String>.from(_specialties), // Ensure it's List<String>
         'experience': _experienceController.text,
         'languages': List<String>.from(_languages), // Ensure it's List<String>
         'bio': _bioController.text,
@@ -391,11 +431,14 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
       });
 
       await _saveCounsellors(); // Save after add/edit
+      if (!mounted) return;
 
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(_editingId == null ? 'Counsellor added successfully' : 'Counsellor updated successfully'),
+          content: Text(_editingId == null
+              ? 'Counsellor added successfully'
+              : 'Counsellor updated successfully'),
           backgroundColor: _sage,
           duration: const Duration(seconds: 2),
         ),
@@ -524,7 +567,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                         padding: const EdgeInsets.all(20),
                         children: [
                           Text(
-                            _editingId == null ? 'Add New Counsellor' : 'Edit Counsellor',
+                            _editingId == null
+                                ? 'Add New Counsellor'
+                                : 'Edit Counsellor',
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w800,
@@ -532,7 +577,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          
+
                           // Name
                           TextFormField(
                             controller: _nameController,
@@ -541,10 +586,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.person_outline),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Title
                           TextFormField(
                             controller: _titleController,
@@ -553,10 +599,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.work_outline),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Experience
                           TextFormField(
                             controller: _experienceController,
@@ -565,10 +612,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.timer_outlined),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Rating
                           TextFormField(
                             controller: _ratingController,
@@ -588,7 +636,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                             },
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Reviews
                           TextFormField(
                             controller: _reviewsController,
@@ -598,24 +646,28 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               prefixIcon: Icon(Icons.reviews_outlined),
                             ),
                             keyboardType: TextInputType.number,
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Specialties
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Specialties *', style: TextStyle(fontWeight: FontWeight.w600)),
+                              const Text('Specialties *',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w600)),
                               const SizedBox(height: 8),
                               Wrap(
                                 spacing: 8,
                                 children: [
                                   ..._specialties.map((s) => Chip(
-                                    label: Text(s),
-                                    onDeleted: () => _removeSpecialty(s),
-                                    deleteIcon: const Icon(Icons.close, size: 16),
-                                  )),
+                                        label: Text(s),
+                                        onDeleted: () => _removeSpecialty(s),
+                                        deleteIcon:
+                                            const Icon(Icons.close, size: 16),
+                                      )),
                                   ActionChip(
                                     label: const Text('+ Add'),
                                     onPressed: _addSpecialty,
@@ -628,27 +680,31 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                                   padding: const EdgeInsets.only(top: 8),
                                   child: Text(
                                     'Add at least one specialty',
-                                    style: TextStyle(color: _peach, fontSize: 12),
+                                    style:
+                                        TextStyle(color: _peach, fontSize: 12),
                                   ),
                                 ),
                             ],
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Languages
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Languages *', style: TextStyle(fontWeight: FontWeight.w600)),
+                              const Text('Languages *',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w600)),
                               const SizedBox(height: 8),
                               Wrap(
                                 spacing: 8,
                                 children: [
                                   ..._languages.map((l) => Chip(
-                                    label: Text(l),
-                                    onDeleted: () => _removeLanguage(l),
-                                    deleteIcon: const Icon(Icons.close, size: 16),
-                                  )),
+                                        label: Text(l),
+                                        onDeleted: () => _removeLanguage(l),
+                                        deleteIcon:
+                                            const Icon(Icons.close, size: 16),
+                                      )),
                                   ActionChip(
                                     label: const Text('+ Add'),
                                     onPressed: _addLanguage,
@@ -661,13 +717,14 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                                   padding: const EdgeInsets.only(top: 8),
                                   child: Text(
                                     'Add at least one language',
-                                    style: TextStyle(color: _peach, fontSize: 12),
+                                    style:
+                                        TextStyle(color: _peach, fontSize: 12),
                                   ),
                                 ),
                             ],
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Bio
                           TextFormField(
                             controller: _bioController,
@@ -677,10 +734,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               prefixIcon: Icon(Icons.description_outlined),
                             ),
                             maxLines: 3,
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Education
                           TextFormField(
                             controller: _educationController,
@@ -689,10 +747,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.school_outlined),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Certifications
                           TextFormField(
                             controller: _certificationsController,
@@ -701,10 +760,11 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.verified_outlined),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Availability
                           TextFormField(
                             controller: _availabilityController,
@@ -713,18 +773,21 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               border: OutlineInputBorder(),
                               prefixIcon: Icon(Icons.calendar_today_outlined),
                             ),
-                            validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+                            validator: (v) =>
+                                v?.isEmpty ?? true ? 'Required' : null,
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Color Selection
-                          const Text('Profile Color', style: TextStyle(fontWeight: FontWeight.w600)),
+                          const Text('Profile Color',
+                              style: TextStyle(fontWeight: FontWeight.w600)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
                             children: _availableColors.map((color) {
                               return GestureDetector(
-                                onTap: () => setSheetState(() => _selectedColor = color),
+                                onTap: () =>
+                                    setSheetState(() => _selectedColor = color),
                                 child: Container(
                                   width: 40,
                                   height: 40,
@@ -732,7 +795,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                                     color: color,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: _selectedColor == color ? _textDark : Colors.transparent,
+                                      color: _selectedColor == color
+                                          ? _textDark
+                                          : Colors.transparent,
                                       width: 3,
                                     ),
                                   ),
@@ -741,40 +806,50 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                             }).toList(),
                           ),
                           const SizedBox(height: 16),
-                          
+
                           // Icon Selection
-                          const Text('Profile Icon', style: TextStyle(fontWeight: FontWeight.w600)),
+                          const Text('Profile Icon',
+                              style: TextStyle(fontWeight: FontWeight.w600)),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
                             children: _availableIcons.map((icon) {
                               return GestureDetector(
-                                onTap: () => setSheetState(() => _selectedIcon = icon),
+                                onTap: () =>
+                                    setSheetState(() => _selectedIcon = icon),
                                 child: Container(
                                   width: 50,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color: _selectedIcon == icon ? _selectedColor : _bg,
+                                    color: _selectedIcon == icon
+                                        ? _selectedColor
+                                        : _bg,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: _selectedIcon == icon ? _selectedColor : _border,
+                                      color: _selectedIcon == icon
+                                          ? _selectedColor
+                                          : _border,
                                       width: 2,
                                     ),
                                   ),
-                                  child: Icon(icon, color: _selectedIcon == icon ? Colors.white : _textMid),
+                                  child: Icon(icon,
+                                      color: _selectedIcon == icon
+                                          ? Colors.white
+                                          : _textMid),
                                 ),
                               );
                             }).toList(),
                           ),
                           const SizedBox(height: 24),
-                          
+
                           // Save Button
                           ElevatedButton(
                             onPressed: () {
                               if (_specialties.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Please add at least one specialty'),
+                                    content: Text(
+                                        'Please add at least one specialty'),
                                     backgroundColor: _peach,
                                   ),
                                 );
@@ -783,7 +858,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               if (_languages.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Please add at least one language'),
+                                    content: Text(
+                                        'Please add at least one language'),
                                     backgroundColor: _peach,
                                   ),
                                 );
@@ -799,7 +875,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            child: const Text('Save Counsellor', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                            child: const Text('Save Counsellor',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w700)),
                           ),
                           const SizedBox(height: 16),
                         ],
@@ -819,7 +897,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     // Ensure specialties and languages are List<String>
     final specialties = List<String>.from(counsellor['specialties'] ?? []);
     final languages = List<String>.from(counsellor['languages'] ?? []);
-    
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
@@ -827,7 +905,7 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -839,8 +917,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: (counsellor['color'] as Color).withOpacity(0.08),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              color: (counsellor['color'] as Color).withValues(alpha: 0.08),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Row(
               children: [
@@ -852,7 +931,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: (counsellor['color'] as Color).withOpacity(0.3),
+                        color: (counsellor['color'] as Color)
+                            .withValues(alpha: 0.3),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -889,7 +969,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          const Icon(Icons.star_rounded, color: Color(0xFFF4C542), size: 16),
+                          const Icon(Icons.star_rounded,
+                              color: Color(0xFFF4C542), size: 16),
                           const SizedBox(width: 4),
                           Text(
                             '${counsellor['rating']}',
@@ -943,7 +1024,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                   runSpacing: 8,
                   children: specialties.map((specialty) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
                         color: _bg,
                         borderRadius: BorderRadius.circular(12),
@@ -963,7 +1045,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    const Icon(Icons.language_rounded, color: _textLight, size: 14),
+                    const Icon(Icons.language_rounded,
+                        color: _textLight, size: 14),
                     const SizedBox(width: 6),
                     Text(
                       languages.join(' · '),
@@ -990,7 +1073,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                     children: [
                       Expanded(
                         child: OutlinedButton.icon(
-                          onPressed: () => _showCounsellorDetails(context, counsellor),
+                          onPressed: () =>
+                              _showCounsellorDetails(context, counsellor),
                           icon: const Icon(Icons.info_rounded, size: 18),
                           label: const Text('View Profile'),
                           style: OutlinedButton.styleFrom(
@@ -1046,7 +1130,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     );
   }
 
-  Widget _buildInfoChip(IconData icon, String label, Color color, Color lightColor) {
+  Widget _buildInfoChip(
+      IconData icon, String label, Color color, Color lightColor) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
@@ -1070,10 +1155,10 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
     );
   }
 
-  void _showCounsellorDetails(BuildContext context, Map<String, dynamic> counsellor) {
-    final specialties = List<String>.from(counsellor['specialties'] ?? []);
+  void _showCounsellorDetails(
+      BuildContext context, Map<String, dynamic> counsellor) {
     final languages = List<String>.from(counsellor['languages'] ?? []);
-    
+
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -1145,7 +1230,8 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                               const SizedBox(height: 8),
                               Row(
                                 children: [
-                                  const Icon(Icons.star_rounded, color: Color(0xFFF4C542), size: 18),
+                                  const Icon(Icons.star_rounded,
+                                      color: Color(0xFFF4C542), size: 18),
                                   const SizedBox(width: 4),
                                   Text(
                                     '${counsellor['rating']}',
@@ -1171,15 +1257,24 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                       ],
                     ),
                     const SizedBox(height: 24),
-                    _buildDetailSection('Education', Icons.school_rounded, counsellor['education'], _sage),
+                    _buildDetailSection('Education', Icons.school_rounded,
+                        counsellor['education'], _sage),
                     const SizedBox(height: 16),
-                    _buildDetailSection('Certifications', Icons.verified_rounded, counsellor['certifications'], _teal),
+                    _buildDetailSection(
+                        'Certifications',
+                        Icons.verified_rounded,
+                        counsellor['certifications'],
+                        _teal),
                     const SizedBox(height: 16),
-                    _buildDetailSection('Availability', Icons.schedule_rounded, counsellor['availability'], _peach),
+                    _buildDetailSection('Availability', Icons.schedule_rounded,
+                        counsellor['availability'], _peach),
                     const SizedBox(height: 16),
-                    _buildDetailSection('Languages', Icons.language_rounded, languages.join(' · '), _lavender),
+                    _buildDetailSection('Languages', Icons.language_rounded,
+                        languages.join(' · '), _lavender),
                     const SizedBox(height: 16),
-                    _buildDetailSection('Biography', Icons.description_rounded, counsellor['bio'], _textMid, isLongText: true),
+                    _buildDetailSection('Biography', Icons.description_rounded,
+                        counsellor['bio'], _textMid,
+                        isLongText: true),
                     const SizedBox(height: 24),
                     Row(
                       children: [
@@ -1357,7 +1452,9 @@ class _CounsellorsScreenState extends State<CounsellorsScreen> {
                   Icon(Icons.people_outline, size: 64, color: _textLight),
                   const SizedBox(height: 16),
                   Text(
-                    _searchQuery.isEmpty ? 'No counsellors added yet' : 'No counsellors found',
+                    _searchQuery.isEmpty
+                        ? 'No counsellors added yet'
+                        : 'No counsellors found',
                     style: TextStyle(color: _textMid, fontSize: 16),
                   ),
                   const SizedBox(height: 8),
@@ -1421,7 +1518,8 @@ class CounsellorSearchDelegate extends SearchDelegate<Map<String, dynamic>?> {
     final results = counsellors.where((counsellor) {
       return counsellor['name'].toLowerCase().contains(query.toLowerCase()) ||
           counsellor['title'].toLowerCase().contains(query.toLowerCase()) ||
-          (counsellor['specialties'] as List<String>).any((s) => s.toLowerCase().contains(query.toLowerCase()));
+          (counsellor['specialties'] as List<String>)
+              .any((s) => s.toLowerCase().contains(query.toLowerCase()));
     }).toList();
 
     return ListView.builder(

@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:mind_path/locale_manager.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -92,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -601,7 +601,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                     color: _redLight,
                     borderRadius: BorderRadius.circular(18),
                     border:
-                        Border.all(color: _red.withOpacity(0.3)),
+                        Border.all(color: _red.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

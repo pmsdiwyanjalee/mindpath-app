@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../l10n/app_localizations_fallback.dart';
 
 class AppointmentsScreen extends StatefulWidget {
   const AppointmentsScreen({super.key});
@@ -24,7 +23,6 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
   static const Color _peach      = Color(0xFFE8926A);
   static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
-  static const Color _lavLight   = Color(0xFFEAE6F5);
   static const Color _gold       = Color(0xFFF4C542);
   static const Color _goldLight  = Color(0xFFFDF3CC);
   static const Color _textDark   = Color(0xFF2D3142);
@@ -163,7 +161,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 18,
               offset: const Offset(0, 4),
             ),
@@ -407,7 +405,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
 
   void _showBookingSheet(BuildContext context) {
     final l = AppLocalizations.of(context)!;
-    String _selectedMethod = 'videoCall';
+    String selectedMethod = 'videoCall';
 
     showModalBottomSheet(
       context: context,
@@ -480,7 +478,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                     Expanded(
                       child: GestureDetector(
                         onTap: () => setSheet(
-                            () => _selectedMethod = m[0] as String),
+                            () => selectedMethod = m[0] as String),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 180),
                           margin: EdgeInsets.only(
@@ -488,19 +486,19 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                           padding: const EdgeInsets.symmetric(
                               vertical: 12),
                           decoration: BoxDecoration(
-                            color: _selectedMethod == m[0]
+                            color: selectedMethod == m[0]
                                 ? _teal
                                 : _bg,
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                                color: _selectedMethod == m[0]
+                                color: selectedMethod == m[0]
                                     ? _teal
                                     : _border),
                           ),
                           child: Column(
                             children: [
                               Icon(m[1] as IconData,
-                                  color: _selectedMethod == m[0]
+                                  color: selectedMethod == m[0]
                                       ? Colors.white
                                       : _textMid,
                                   size: 20),
@@ -509,7 +507,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                                 _aptMethod(ctx, m[0] as String),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: _selectedMethod == m[0]
+                                  color: selectedMethod == m[0]
                                       ? Colors.white
                                       : _textMid,
                                   fontSize: 11,
@@ -691,7 +689,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
           borderRadius: BorderRadius.circular(22),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -846,7 +844,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 14,
               offset: const Offset(0, 3),
             ),
@@ -1038,7 +1036,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen>
                 decoration: BoxDecoration(
                   color: _goldLight,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: _gold.withOpacity(0.25)),
+                  border: Border.all(color: _gold.withValues(alpha: 0.25)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

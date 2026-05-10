@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProgressScreen extends StatefulWidget {
-  const ProgressScreen({Key? key}) : super(key: key);
+  const ProgressScreen({super.key});
 
   @override
   State<ProgressScreen> createState() => _ProgressScreenState();
@@ -59,7 +59,7 @@ class _ProgressScreenState extends State<ProgressScreen>
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 20,
             offset: const Offset(0, 4),
           ),
@@ -110,7 +110,7 @@ class _ProgressScreenState extends State<ProgressScreen>
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -202,7 +202,7 @@ class _ProgressScreenState extends State<ProgressScreen>
         color: achieved ? accentLight : _bg,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
-          color: achieved ? accent.withOpacity(0.25) : _border,
+          color: achieved ? accent.withValues(alpha: 0.25) : _border,
         ),
       ),
       child: Row(
@@ -211,7 +211,7 @@ class _ProgressScreenState extends State<ProgressScreen>
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: achieved ? accent.withOpacity(0.15) : _border.withOpacity(0.5),
+              color: achieved ? accent.withValues(alpha: 0.15) : _border.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Center(
@@ -307,7 +307,7 @@ class _ProgressScreenState extends State<ProgressScreen>
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: _sage.withOpacity(0.3),
+                    color: _sage.withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 6),
                   ),
@@ -362,7 +362,7 @@ class _ProgressScreenState extends State<ProgressScreen>
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       shape: BoxShape.circle,
                     ),
                     child: const Center(

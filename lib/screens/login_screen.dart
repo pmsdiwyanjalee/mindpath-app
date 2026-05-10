@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -10,32 +10,29 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with TickerProviderStateMixin {
-  final _emailController    = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _showPassword  = false;
-  bool _isLoading     = false;
+  bool _showPassword = false;
+  bool _isLoading = false;
   String? _errorMessage;
 
   late AnimationController _entranceController;
   late AnimationController _floatController;
-  late Animation<double>   _fadeAnim;
-  late Animation<Offset>   _slideAnim;
-  late Animation<double>   _floatAnim;
+  late Animation<double> _fadeAnim;
+  late Animation<Offset> _slideAnim;
+  late Animation<double> _floatAnim;
 
   // ── Palette ───────────────────────────────────────────────────────────────
-  static const Color _bg         = Color(0xFFF6F4F0);
-  static const Color _surface    = Color(0xFFFFFFFF);
-  static const Color _sage       = Color(0xFF7CA982);
-  static const Color _sageLight  = Color(0xFFD4EAD7);
-  static const Color _teal       = Color(0xFF4A9EAF);
-  static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
+  static const Color _bg = Color(0xFFF6F4F0);
+  static const Color _surface = Color(0xFFFFFFFF);
+  static const Color _sage = Color(0xFF7CA982);
+  static const Color _teal = Color(0xFF4A9EAF);
+  static const Color _peach = Color(0xFFE8926A);
   static const Color _peachLight = Color(0xFFFAE2D5);
-  static const Color _lavender   = Color(0xFF9B8EC4);
-  static const Color _textDark   = Color(0xFF2D3142);
-  static const Color _textMid    = Color(0xFF6B7280);
-  static const Color _textLight  = Color(0xFF9CA3AF);
-  static const Color _border     = Color(0xFFE8E5E0);
+  static const Color _textDark = Color(0xFF2D3142);
+  static const Color _textMid = Color(0xFF6B7280);
+  static const Color _textLight = Color(0xFF9CA3AF);
+  static const Color _border = Color(0xFFE8E5E0);
 
   @override
   void initState() {
@@ -82,10 +79,11 @@ class _LoginScreenState extends State<LoginScreen>
       _isLoading = true;
     });
 
-    final email    = _emailController.text.trim();
+    final email = _emailController.text.trim();
     final password = _passwordController.text;
 
     await Future.delayed(const Duration(milliseconds: 600));
+    if (!mounted) return;
 
     if (email.isEmpty || password.isEmpty) {
       setState(() {
@@ -190,7 +188,6 @@ class _LoginScreenState extends State<LoginScreen>
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               // ── Hero Section ─────────────────────────────────────────────
               Container(
                 width: double.infinity,
@@ -207,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: _sage.withOpacity(0.3),
+                      color: _sage.withValues(alpha: 0.3),
                       blurRadius: 24,
                       offset: const Offset(0, 8),
                     ),
@@ -229,11 +226,11 @@ class _LoginScreenState extends State<LoginScreen>
                           child: Container(
                             padding: const EdgeInsets.all(18),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
+                                  color: Colors.black.withValues(alpha: 0.1),
                                   blurRadius: 20,
                                   offset: const Offset(0, 6),
                                 ),
@@ -269,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen>
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.15),
+                            color: Colors.white.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: const Text(
@@ -297,7 +294,6 @@ class _LoginScreenState extends State<LoginScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-
                         // Card
                         Container(
                           padding: const EdgeInsets.all(24),
@@ -306,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen>
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.06),
+                                color: Colors.black.withValues(alpha: 0.06),
                                 blurRadius: 24,
                                 offset: const Offset(0, 6),
                               ),
@@ -328,8 +324,8 @@ class _LoginScreenState extends State<LoginScreen>
                               const SizedBox(height: 6),
                               const Text(
                                 'Sign in to continue your path to wellness',
-                                style: TextStyle(
-                                    color: _textMid, fontSize: 13.5),
+                                style:
+                                    TextStyle(color: _textMid, fontSize: 13.5),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 24),
@@ -394,7 +390,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     color: _peachLight,
                                     borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                        color: _peach.withOpacity(0.3)),
+                                        color: _peach.withValues(alpha: 0.3)),
                                   ),
                                   child: Row(
                                     children: [
@@ -423,7 +419,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   backgroundColor: _sage,
                                   foregroundColor: Colors.white,
                                   disabledBackgroundColor:
-                                      _sage.withOpacity(0.6),
+                                      _sage.withValues(alpha: 0.6),
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 16),
                                   shape: RoundedRectangleBorder(
@@ -452,8 +448,7 @@ class _LoginScreenState extends State<LoginScreen>
 
                               // Divider
                               Row(children: [
-                                const Expanded(
-                                    child: Divider(color: _border)),
+                                const Expanded(child: Divider(color: _border)),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
@@ -461,8 +456,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       style: TextStyle(
                                           color: _textLight, fontSize: 12)),
                                 ),
-                                const Expanded(
-                                    child: Divider(color: _border)),
+                                const Expanded(child: Divider(color: _border)),
                               ]),
                               const SizedBox(height: 16),
 
@@ -472,8 +466,8 @@ class _LoginScreenState extends State<LoginScreen>
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: _textDark,
                                   side: const BorderSide(color: _border),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 14),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
@@ -578,7 +572,7 @@ class _GoogleGPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final cx = size.width / 2;
     final cy = size.height / 2;
-    final r  = size.width / 2;
+    final r = size.width / 2;
 
     // Draw coloured arcs
     final colors = [
@@ -624,4 +618,4 @@ class _GoogleGPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-} 
+}

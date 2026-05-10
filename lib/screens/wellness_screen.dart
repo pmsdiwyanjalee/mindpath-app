@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WellnessScreen extends StatefulWidget {
-  const WellnessScreen({Key? key}) : super(key: key);
+  const WellnessScreen({super.key});
 
   @override
   State<WellnessScreen> createState() => _WellnessScreenState();
@@ -24,12 +24,7 @@ class _WellnessScreenState extends State<WellnessScreen>
   static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
   static const Color _lavLight   = Color(0xFFEAE6F5);
-  static const Color _gold       = Color(0xFFF4C542);
-  static const Color _goldLight  = Color(0xFFFDF3CC);
-  static const Color _red        = Color(0xFFD94F4F);
-  static const Color _redLight   = Color(0xFFFAE0E0);
   static const Color _textDark   = Color(0xFF2D3142);
-  static const Color _textMid    = Color(0xFF6B7280);
   static const Color _textLight  = Color(0xFF9CA3AF);
   static const Color _border     = Color(0xFFE8E5E0);
 
@@ -267,7 +262,7 @@ class _WellnessScreenState extends State<WellnessScreen>
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 18,
               offset: const Offset(0, 4),
             ),
@@ -344,7 +339,7 @@ class _WellnessScreenState extends State<WellnessScreen>
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: _sage.withOpacity(0.3),
+                      color: _sage.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),
@@ -487,7 +482,7 @@ class _WellnessScreenState extends State<WellnessScreen>
                                             value: pct * _barAnim.value,
                                             color: color,
                                             backgroundColor:
-                                                color.withOpacity(0.12),
+                                                color.withValues(alpha: 0.12),
                                             minHeight: 7,
                                           ),
                                         ),
@@ -529,7 +524,7 @@ class _WellnessScreenState extends State<WellnessScreen>
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 14,
                           offset: const Offset(0, 4),
                         ),

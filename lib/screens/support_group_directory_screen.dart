@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SupportGroupDirectoryScreen extends StatefulWidget {
-  const SupportGroupDirectoryScreen({Key? key}) : super(key: key);
+  const SupportGroupDirectoryScreen({super.key});
 
   @override
   State<SupportGroupDirectoryScreen> createState() =>
@@ -23,7 +23,6 @@ class _SupportGroupDirectoryScreenState
   static const Color _teal       = Color(0xFF4A9EAF);
   static const Color _tealLight  = Color(0xFFD6EEF3);
   static const Color _peach      = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
   static const Color _lavLight   = Color(0xFFEAE6F5);
   static const Color _gold       = Color(0xFFF4C542);
@@ -345,7 +344,7 @@ class _SupportGroupDirectoryScreenState
           borderRadius: BorderRadius.circular(22),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 16,
               offset: const Offset(0, 4),
             ),
@@ -676,7 +675,7 @@ class _SupportGroupDirectoryScreenState
           boxShadow: selected
               ? [
                   BoxShadow(
-                      color: accent.withOpacity(0.25),
+                      color: accent.withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 3))
                 ]

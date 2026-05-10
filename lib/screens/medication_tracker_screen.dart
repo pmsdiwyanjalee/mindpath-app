@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MedicationTrackerScreen extends StatefulWidget {
-  const MedicationTrackerScreen({Key? key}) : super(key: key);
+  const MedicationTrackerScreen({super.key});
 
   @override
   State<MedicationTrackerScreen> createState() =>
@@ -11,26 +11,26 @@ class MedicationTrackerScreen extends StatefulWidget {
 class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _entranceController;
-  late Animation<double>   _fadeAnim;
-  late Animation<double>   _barAnim;
+  late Animation<double> _fadeAnim;
+  late Animation<double> _barAnim;
 
   // ── Palette ───────────────────────────────────────────────────────────────
-  static const Color _bg         = Color(0xFFF6F4F0);
-  static const Color _surface    = Color(0xFFFFFFFF);
-  static const Color _sage       = Color(0xFF7CA982);
-  static const Color _sageLight  = Color(0xFFD4EAD7);
-  static const Color _teal       = Color(0xFF4A9EAF);
-  static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
+  static const Color _bg = Color(0xFFF6F4F0);
+  static const Color _surface = Color(0xFFFFFFFF);
+  static const Color _sage = Color(0xFF7CA982);
+  static const Color _sageLight = Color(0xFFD4EAD7);
+  static const Color _teal = Color(0xFF4A9EAF);
+  static const Color _tealLight = Color(0xFFD6EEF3);
+  static const Color _peach = Color(0xFFE8926A);
   static const Color _peachLight = Color(0xFFFAE2D5);
-  static const Color _lavender   = Color(0xFF9B8EC4);
-  static const Color _lavLight   = Color(0xFFEAE6F5);
-  static const Color _gold       = Color(0xFFF4C542);
-  static const Color _goldLight  = Color(0xFFFDF3CC);
-  static const Color _textDark   = Color(0xFF2D3142);
-  static const Color _textMid    = Color(0xFF6B7280);
-  static const Color _textLight  = Color(0xFF9CA3AF);
-  static const Color _border     = Color(0xFFE8E5E0);
+  static const Color _lavender = Color(0xFF9B8EC4);
+  static const Color _lavLight = Color(0xFFEAE6F5);
+  static const Color _gold = Color(0xFFF4C542);
+  static const Color _goldLight = Color(0xFFFDF3CC);
+  static const Color _textDark = Color(0xFF2D3142);
+  static const Color _textMid = Color(0xFF6B7280);
+  static const Color _textLight = Color(0xFF9CA3AF);
+  static const Color _border = Color(0xFFE8E5E0);
 
   // Each medication gets its own accent
   static const List<List<Color>> _medAccents = [
@@ -76,11 +76,36 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
   ];
 
   final List<Map<String, dynamic>> _history = [
-    {'date': 'April 4 (Today)', 'medication': 'Naltrexone', 'taken': true,  'time': '8:15 AM'},
-    {'date': 'April 4 (Today)', 'medication': 'Sertraline',  'taken': true,  'time': '8:10 AM'},
-    {'date': 'April 3',         'medication': 'Naltrexone', 'taken': true,  'time': '8:00 AM'},
-    {'date': 'April 3',         'medication': 'Sertraline',  'taken': true,  'time': '8:05 AM'},
-    {'date': 'April 3',         'medication': 'Bupropion',   'taken': true,  'time': '6:10 AM'},
+    {
+      'date': 'April 4 (Today)',
+      'medication': 'Naltrexone',
+      'taken': true,
+      'time': '8:15 AM'
+    },
+    {
+      'date': 'April 4 (Today)',
+      'medication': 'Sertraline',
+      'taken': true,
+      'time': '8:10 AM'
+    },
+    {
+      'date': 'April 3',
+      'medication': 'Naltrexone',
+      'taken': true,
+      'time': '8:00 AM'
+    },
+    {
+      'date': 'April 3',
+      'medication': 'Sertraline',
+      'taken': true,
+      'time': '8:05 AM'
+    },
+    {
+      'date': 'April 3',
+      'medication': 'Bupropion',
+      'taken': true,
+      'time': '6:10 AM'
+    },
   ];
 
   @override
@@ -90,8 +115,10 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
       vsync: this,
       duration: const Duration(milliseconds: 900),
     )..forward();
-    _fadeAnim = CurvedAnimation(parent: _entranceController, curve: Curves.easeOut);
-    _barAnim  = CurvedAnimation(parent: _entranceController, curve: Curves.easeOutCubic);
+    _fadeAnim =
+        CurvedAnimation(parent: _entranceController, curve: Curves.easeOut);
+    _barAnim = CurvedAnimation(
+        parent: _entranceController, curve: Curves.easeOutCubic);
   }
 
   @override
@@ -100,8 +127,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
     super.dispose();
   }
 
-  int get _takenToday =>
-      _medications.where((m) => m['today'] as bool).length;
+  int get _takenToday => _medications.where((m) => m['today'] as bool).length;
 
   double get _avgAdherence =>
       _medications.fold<int>(0, (s, m) => s + (m['adherence'] as int)) /
@@ -111,8 +137,8 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
 
   void _showMedDetail(Map<String, dynamic> med, int index) {
     final accent = _medAccents[index % _medAccents.length][0];
-    final light  = _medAccents[index % _medAccents.length][1];
-    final taken  = med['today'] as bool;
+    final light = _medAccents[index % _medAccents.length][1];
+    final taken = med['today'] as bool;
 
     showModalBottomSheet(
       context: context,
@@ -188,11 +214,14 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
 
               // Detail grid
               Row(children: [
-                _detailChip(Icons.medication_rounded, med['dosage'], accent, light),
+                _detailChip(
+                    Icons.medication_rounded, med['dosage'], accent, light),
                 const SizedBox(width: 10),
-                _detailChip(Icons.repeat_rounded, med['frequency'], accent, light),
+                _detailChip(
+                    Icons.repeat_rounded, med['frequency'], accent, light),
                 const SizedBox(width: 10),
-                _detailChip(Icons.access_time_rounded, med['time'], accent, light),
+                _detailChip(
+                    Icons.access_time_rounded, med['time'], accent, light),
               ]),
               const SizedBox(height: 16),
 
@@ -202,7 +231,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                 decoration: BoxDecoration(
                   color: light,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: accent.withOpacity(0.25)),
+                  border: Border.all(color: accent.withValues(alpha: 0.25)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +257,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                       child: LinearProgressIndicator(
                         value: (med['adherence'] as int) / 100,
                         color: accent,
-                        backgroundColor: accent.withOpacity(0.15),
+                        backgroundColor: accent.withValues(alpha: 0.15),
                         minHeight: 8,
                       ),
                     ),
@@ -252,12 +281,11 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                 decoration: BoxDecoration(
                     color: _goldLight,
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: _gold.withOpacity(0.25))),
+                    border: Border.all(color: _gold.withValues(alpha: 0.25))),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.info_outline_rounded,
-                        color: _gold, size: 18),
+                    Icon(Icons.info_outline_rounded, color: _gold, size: 18),
                     const SizedBox(width: 10),
                     const Expanded(
                       child: Text(
@@ -278,8 +306,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
     );
   }
 
-  Widget _detailChip(
-      IconData icon, String label, Color color, Color light) {
+  Widget _detailChip(IconData icon, String label, Color color, Color light) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
@@ -292,9 +319,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
             Text(label,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: color,
-                    fontSize: 11.5,
-                    fontWeight: FontWeight.w700)),
+                    color: color, fontSize: 11.5, fontWeight: FontWeight.w700)),
           ],
         ),
       ),
@@ -305,8 +330,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
 
   Widget _buildMedicationCard(Map<String, dynamic> med, int index) {
     final accent = _medAccents[index % _medAccents.length][0];
-    final light  = _medAccents[index % _medAccents.length][1];
-    final taken  = med['today'] as bool;
+    final taken = med['today'] as bool;
 
     return GestureDetector(
       onTap: () => _showMedDetail(med, index),
@@ -317,7 +341,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 14,
               offset: const Offset(0, 4),
             ),
@@ -339,7 +363,8 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
 
             // Status bubble
             Container(
-              width: 46, height: 46,
+              width: 46,
+              height: 46,
               decoration: BoxDecoration(
                 color: taken ? accent : _peachLight,
                 shape: BoxShape.circle,
@@ -366,12 +391,11 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                             fontWeight: FontWeight.w700)),
                     const SizedBox(height: 3),
                     Text('${med['dosage']} · ${med['frequency']}',
-                        style: const TextStyle(
-                            color: _textMid, fontSize: 12.5)),
+                        style:
+                            const TextStyle(color: _textMid, fontSize: 12.5)),
                     const SizedBox(height: 4),
                     Row(children: [
-                      Icon(Icons.access_time_rounded,
-                          color: accent, size: 12),
+                      Icon(Icons.access_time_rounded, color: accent, size: 12),
                       const SizedBox(width: 4),
                       Text(med['time'],
                           style: TextStyle(
@@ -395,8 +419,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                           fontSize: 14,
                           fontWeight: FontWeight.w800)),
                   Text('adherence',
-                      style: const TextStyle(
-                          color: _textLight, fontSize: 10)),
+                      style: const TextStyle(color: _textLight, fontSize: 10)),
                 ],
               ),
             ),
@@ -417,15 +440,14 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
           child: Row(
             children: [
               Container(
-                width: 36, height: 36,
+                width: 36,
+                height: 36,
                 decoration: BoxDecoration(
                   color: taken ? _sageLight : _peachLight,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  taken
-                      ? Icons.check_circle_rounded
-                      : Icons.cancel_rounded,
+                  taken ? Icons.check_circle_rounded : Icons.cancel_rounded,
                   color: taken ? _sage : _peach,
                   size: 20,
                 ),
@@ -442,8 +464,8 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                             fontSize: 13.5)),
                     const SizedBox(height: 2),
                     Text(item['date'],
-                        style: const TextStyle(
-                            color: _textLight, fontSize: 11.5)),
+                        style:
+                            const TextStyle(color: _textLight, fontSize: 11.5)),
                   ],
                 ),
               ),
@@ -455,8 +477,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
             ],
           ),
         ),
-        if (!isLast)
-          Divider(height: 1, color: _border, indent: 48),
+        if (!isLast) Divider(height: 1, color: _border, indent: 48),
       ],
     );
   }
@@ -465,7 +486,8 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
 
   Widget _handle() => Center(
         child: Container(
-          width: 40, height: 4,
+          width: 40,
+          height: 4,
           margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
               color: _border, borderRadius: BorderRadius.circular(2)),
@@ -479,7 +501,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 18,
               offset: const Offset(0, 4),
             ),
@@ -489,23 +511,20 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
       );
 
   Widget _sectionHeader(
-      String title, IconData icon, Color accent, Color accentLight) =>
+          String title, IconData icon, Color accent, Color accentLight) =>
       Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Row(children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: accentLight,
-                borderRadius: BorderRadius.circular(10)),
+                color: accentLight, borderRadius: BorderRadius.circular(10)),
             child: Icon(icon, color: accent, size: 18),
           ),
           const SizedBox(width: 10),
           Text(title,
               style: const TextStyle(
-                  color: _textDark,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700)),
+                  color: _textDark, fontSize: 17, fontWeight: FontWeight.w700)),
         ]),
       );
 
@@ -524,9 +543,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
         ),
         title: const Text('Medication Tracker',
             style: TextStyle(
-                color: _textDark,
-                fontSize: 17,
-                fontWeight: FontWeight.w700)),
+                color: _textDark, fontSize: 17, fontWeight: FontWeight.w700)),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Divider(height: 1, color: _border),
@@ -539,7 +556,6 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-
               // ── Hero Adherence Banner ────────────────────────────────────
               Container(
                 padding: const EdgeInsets.all(20),
@@ -552,7 +568,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: _sage.withOpacity(0.3),
+                      color: _sage.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),
@@ -563,19 +579,13 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _heroPill(
-                            '${_medications.length}',
-                            'Medications',
+                        _heroPill('${_medications.length}', 'Medications',
                             Icons.medication_rounded),
                         Container(width: 1, height: 44, color: Colors.white24),
-                        _heroPill(
-                            '$_takenToday',
-                            'Taken Today',
+                        _heroPill('$_takenToday', 'Taken Today',
                             Icons.check_circle_outline_rounded),
                         Container(width: 1, height: 44, color: Colors.white24),
-                        _heroPill(
-                            '${_avgAdherence.round()}%',
-                            'Avg Adherence',
+                        _heroPill('${_avgAdherence.round()}%', 'Avg Adherence',
                             Icons.trending_up_rounded),
                       ],
                     ),
@@ -604,15 +614,17 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
               const SizedBox(height: 20),
 
               // ── Today's Medications ──────────────────────────────────────
-              _sectionHeader("Today's Medications",
-                  Icons.today_rounded, _teal, _tealLight),
-              ..._medications.asMap().entries
+              _sectionHeader("Today's Medications", Icons.today_rounded, _teal,
+                  _tealLight),
+              ..._medications
+                  .asMap()
+                  .entries
                   .map((e) => _buildMedicationCard(e.value, e.key)),
               const SizedBox(height: 4),
 
               // ── Adherence Summary Card ───────────────────────────────────
-              _sectionHeader('Adherence Summary',
-                  Icons.bar_chart_rounded, _sage, _sageLight),
+              _sectionHeader('Adherence Summary', Icons.bar_chart_rounded,
+                  _sage, _sageLight),
               _card(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
@@ -620,12 +632,12 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ..._medications.asMap().entries.map((e) {
-                        final med    = e.value;
+                        final med = e.value;
                         final accent =
                             _medAccents[e.key % _medAccents.length][0];
-                        final light  =
+                        final light =
                             _medAccents[e.key % _medAccents.length][1];
-                        final pct    = (med['adherence'] as int) / 100;
+                        final pct = (med['adherence'] as int) / 100;
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 14),
                           child: Column(
@@ -669,7 +681,7 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                                     value: pct * _barAnim.value,
                                     color: accent,
                                     backgroundColor:
-                                        accent.withOpacity(0.12),
+                                        accent.withValues(alpha: 0.12),
                                     minHeight: 7,
                                   ),
                                 ),
@@ -684,12 +696,11 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
               ),
 
               // ── Medication History ───────────────────────────────────────
-              _sectionHeader('Recent History',
-                  Icons.history_rounded, _lavender, _lavLight),
+              _sectionHeader('Recent History', Icons.history_rounded, _lavender,
+                  _lavLight),
               _card(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: _history.asMap().entries.map((e) {
                       return _buildHistoryItem(e.value,
@@ -714,8 +725,8 @@ class _MedicationTrackerScreenState extends State<MedicationTrackerScreen>
                 },
                 icon: const Icon(Icons.notifications_active_rounded),
                 label: const Text('Set Medication Reminder',
-                    style: TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w700)),
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _teal,
                   foregroundColor: Colors.white,

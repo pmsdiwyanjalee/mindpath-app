@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EmergencyResourcesScreen extends StatefulWidget {
-  const EmergencyResourcesScreen({Key? key}) : super(key: key);
+  const EmergencyResourcesScreen({super.key});
 
   @override
   State<EmergencyResourcesScreen> createState() =>
@@ -17,12 +17,9 @@ class _EmergencyResourcesScreenState
   // ── Palette ───────────────────────────────────────────────────────────────
   static const Color _bg         = Color(0xFFF6F4F0);
   static const Color _surface    = Color(0xFFFFFFFF);
-  static const Color _sage       = Color(0xFF7CA982);
   static const Color _sageLight  = Color(0xFFD4EAD7);
   static const Color _teal       = Color(0xFF4A9EAF);
   static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
   static const Color _lavLight   = Color(0xFFEAE6F5);
   static const Color _red        = Color(0xFFD94F4F);
@@ -202,7 +199,7 @@ class _EmergencyResourcesScreenState
               decoration: BoxDecoration(
                 color: light,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: color.withOpacity(0.3)),
+                border: Border.all(color: color.withValues(alpha: 0.3)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -368,7 +365,7 @@ class _EmergencyResourcesScreenState
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 18,
               offset: const Offset(0, 4),
             ),
@@ -409,7 +406,7 @@ class _EmergencyResourcesScreenState
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 14,
               offset: const Offset(0, 3),
             ),
@@ -504,7 +501,7 @@ class _EmergencyResourcesScreenState
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 14,
             offset: const Offset(0, 3),
           ),
@@ -613,7 +610,7 @@ class _EmergencyResourcesScreenState
                   borderRadius: BorderRadius.circular(22),
                   boxShadow: [
                     BoxShadow(
-                      color: _red.withOpacity(0.3),
+                      color: _red.withValues(alpha: 0.3),
                       blurRadius: 16,
                       offset: const Offset(0, 5),
                     ),
@@ -624,7 +621,7 @@ class _EmergencyResourcesScreenState
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.warning_rounded,
@@ -664,7 +661,7 @@ class _EmergencyResourcesScreenState
                   decoration: BoxDecoration(
                     color: _redLight,
                     borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: _red.withOpacity(0.3)),
+                    border: Border.all(color: _red.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -687,13 +684,13 @@ class _EmergencyResourcesScreenState
                                   fontWeight: FontWeight.w800)),
                           Text('For life-threatening emergencies',
                               style: TextStyle(
-                                  color: _red.withOpacity(0.7),
+                                  color: _red.withValues(alpha: 0.7),
                                   fontSize: 12)),
                         ],
                       ),
                       const Spacer(),
                       Icon(Icons.chevron_right_rounded,
-                          color: _red.withOpacity(0.5)),
+                          color: _red.withValues(alpha: 0.5)),
                     ],
                   ),
                 ),

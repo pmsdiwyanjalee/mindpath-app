@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'counsellors_screen.dart'; // Import the counsellors screen
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -259,7 +259,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             Center(
               child: Container(
                 padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(color: color.withOpacity(0.12), shape: BoxShape.circle),
+                decoration: BoxDecoration(color: color.withValues(alpha: 0.12), shape: BoxShape.circle),
                 child: Text(emoji, style: const TextStyle(fontSize: 52)),
               ),
             ),
@@ -275,9 +275,9 @@ class _DashboardScreenState extends State<DashboardScreen>
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                  color: color.withOpacity(0.08),
+                  color: color.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: color.withOpacity(0.2))),
+                  border: Border.all(color: color.withValues(alpha: 0.2))),
               child: Text(messages[mood] ?? '',
                   style: TextStyle(color: _textMid, fontSize: 13.5, height: 1.55),
                   textAlign: TextAlign.center),
@@ -394,7 +394,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                       child: LinearProgressIndicator(
                         value: _rankProgress,
                         color: colors[0],
-                        backgroundColor: colors[0].withOpacity(0.15),
+                        backgroundColor: colors[0].withValues(alpha: 0.15),
                         minHeight: 8,
                       ),
                     ),
@@ -411,7 +411,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                       color: _goldLight, borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: _gold.withOpacity(0.3))),
+                      border: Border.all(color: _gold.withValues(alpha: 0.3))),
                   child: Row(children: [
                     Text('🌟', style: const TextStyle(fontSize: 28)),
                     const SizedBox(width: 12),
@@ -434,9 +434,9 @@ class _DashboardScreenState extends State<DashboardScreen>
                   child: Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: isCurrent ? rc.withOpacity(0.1) : _bg,
+                      color: isCurrent ? rc.withValues(alpha: 0.1) : _bg,
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: isCurrent ? rc.withOpacity(0.4) : _border, width: isCurrent ? 1.5 : 1),
+                      border: Border.all(color: isCurrent ? rc.withValues(alpha: 0.4) : _border, width: isCurrent ? 1.5 : 1),
                     ),
                     child: Row(children: [
                       Text(r['emoji'] as String, style: TextStyle(fontSize: 24, color: achieved ? null : Colors.black26)),
@@ -534,7 +534,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                           child: Row(children: [
                             Container(
                               width: 44, height: 44,
-                              decoration: BoxDecoration(color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(12)),
+                              decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
                               child: Center(child: Text(entry['emoji']!, style: const TextStyle(fontSize: 22))),
                             ),
                             const SizedBox(width: 12),
@@ -592,7 +592,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   color: _sageLight, borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: _sage.withOpacity(0.3))),
+                  border: Border.all(color: _sage.withValues(alpha: 0.3))),
               child: Row(children: [
                 Icon(Icons.calendar_today_rounded, color: _sage, size: 20),
                 const SizedBox(width: 12),
@@ -789,7 +789,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         ])
           Padding(padding: const EdgeInsets.only(bottom: 10), child: Container(
             padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(color: (g[2] as Color).withOpacity(0.08), borderRadius: BorderRadius.circular(14), border: Border.all(color: (g[2] as Color).withOpacity(0.2))),
+            decoration: BoxDecoration(color: (g[2] as Color).withValues(alpha: 0.08), borderRadius: BorderRadius.circular(14), border: Border.all(color: (g[2] as Color).withValues(alpha: 0.2))),
             child: Row(children: [
               Icon(Icons.group_rounded, color: g[2] as Color),
               const SizedBox(width: 12),
@@ -858,7 +858,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     padding: padding ?? const EdgeInsets.all(20),
     decoration: BoxDecoration(
       color: color ?? _surface, borderRadius: BorderRadius.circular(24),
-      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20, offset: const Offset(0, 4))],
+      boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 20, offset: const Offset(0, 4))],
     ),
     child: child,
   );
@@ -878,7 +878,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
-          decoration: BoxDecoration(color: accentLight, borderRadius: BorderRadius.circular(16), border: Border.all(color: accent.withOpacity(0.2))),
+          decoration: BoxDecoration(color: accentLight, borderRadius: BorderRadius.circular(16), border: Border.all(color: accent.withValues(alpha: 0.2))),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
             Container(width: 36, height: 36, decoration: BoxDecoration(color: accent, borderRadius: BorderRadius.circular(10)),
                 child: Icon(icon, color: Colors.white, size: 19)),
@@ -918,7 +918,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? sel.withOpacity(0.15) : Colors.transparent,
+          color: isSelected ? sel.withValues(alpha: 0.15) : Colors.transparent,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: isSelected ? sel : Colors.transparent, width: 2),
         ),
@@ -938,7 +938,7 @@ class _DashboardScreenState extends State<DashboardScreen>
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(color: _bg, borderRadius: BorderRadius.circular(16), border: Border.all(color: _border)),
         child: Row(children: [
-          Container(width: 44, height: 44, decoration: BoxDecoration(color: accent.withOpacity(0.12), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: accent, size: 22)),
+          Container(width: 44, height: 44, decoration: BoxDecoration(color: accent.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: accent, size: 22)),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(title, style: TextStyle(color: _textDark, fontSize: 14, fontWeight: FontWeight.w600)),
@@ -959,7 +959,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           padding: const EdgeInsets.fromLTRB(20, 60, 20, 24),
           decoration: BoxDecoration(gradient: LinearGradient(colors: [_sage, _teal], begin: Alignment.topLeft, end: Alignment.bottomRight)),
           child: Row(children: [
-            Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.3)),
+            Container(padding: const EdgeInsets.all(3), decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withValues(alpha: 0.3)),
                 child: const CircleAvatar(radius: 30, backgroundColor: Colors.white, child: Icon(Icons.person_rounded, color: Color(0xFF7CA982), size: 28))),
             const SizedBox(width: 14),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: const [
@@ -1070,7 +1070,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                         scale: _pulseAnimation,
                         child: Container(
                           padding: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withOpacity(0.25)),
+                          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white.withValues(alpha: 0.25)),
                           child: const CircleAvatar(radius: 30, backgroundColor: Colors.white,
                               child: Icon(Icons.self_improvement_rounded, color: Color(0xFF7CA982), size: 28)),
                         ),
@@ -1121,12 +1121,12 @@ class _DashboardScreenState extends State<DashboardScreen>
                       decoration: BoxDecoration(
                         gradient: LinearGradient(colors: rankColors, begin: Alignment.topLeft, end: Alignment.bottomRight),
                         borderRadius: BorderRadius.circular(24),
-                        boxShadow: [BoxShadow(color: rankColors[0].withOpacity(0.35), blurRadius: 20, offset: const Offset(0, 6))],
+                        boxShadow: [BoxShadow(color: rankColors[0].withValues(alpha: 0.35), blurRadius: 20, offset: const Offset(0, 6))],
                       ),
                       child: Row(children: [
                         Container(
                           width: 64, height: 64,
-                          decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                          decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.2), shape: BoxShape.circle),
                           child: Center(child: Text(rank['emoji'] as String, style: const TextStyle(fontSize: 34))),
                         ),
                         const SizedBox(width: 16),
@@ -1203,17 +1203,17 @@ class _DashboardScreenState extends State<DashboardScreen>
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [_lavender, const Color(0xFF7B6DB0)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       borderRadius: BorderRadius.circular(24),
-                      boxShadow: [BoxShadow(color: _lavender.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 6))],
+                      boxShadow: [BoxShadow(color: _lavender.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 6))],
                     ),
                     child: Column(children: [
                       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                         Row(children: [Icon(Icons.auto_awesome_rounded, color: _gold, size: 22), const SizedBox(width: 8), const Text('Daily Affirmation', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w700))]),
-                        GestureDetector(onTap: _refreshAffirmation, child: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(10)), child: const Icon(Icons.refresh_rounded, color: Colors.white, size: 18))),
+                        GestureDetector(onTap: _refreshAffirmation, child: Container(padding: const EdgeInsets.all(8), decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)), child: const Icon(Icons.refresh_rounded, color: Colors.white, size: 18))),
                       ]),
                       const SizedBox(height: 14),
                       FadeTransition(opacity: _fadeAnimation, child: Text(_currentAffirmation, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 14, fontStyle: FontStyle.italic, height: 1.6))),
                       const SizedBox(height: 10),
-                      Text('Tap to refresh', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 11)),
+                      Text('Tap to refresh', style: TextStyle(color: Colors.white.withValues(alpha: 0.6), fontSize: 11)),
                     ]),
                   ),
                 ),
@@ -1252,7 +1252,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                           Text('Check-in complete for today!', style: TextStyle(color: _sage, fontWeight: FontWeight.w700, fontSize: 14)),
                           if (_moodHistory.isNotEmpty)
                             Text('Mood: ${_moodHistory.first['emoji']} ${_moodHistory.first['mood']} · ${_moodHistory.first['time']}',
-                                style: TextStyle(color: _sage.withOpacity(0.75), fontSize: 12)),
+                                style: TextStyle(color: _sage.withValues(alpha: 0.75), fontSize: 12)),
                         ])),
                         GestureDetector(
                           onTap: () => setState(() { _todayCheckedIn = false; _selectedMood = _moodHistory.isNotEmpty ? _moodHistory.first['mood'] : null; }),
@@ -1281,7 +1281,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                         onPressed: _selectedMood != null ? _saveMood : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _selectedMood != null ? _moodColor(_selectedMood!) : _teal,
-                          disabledBackgroundColor: _teal.withOpacity(0.4),
+                          disabledBackgroundColor: _teal.withValues(alpha: 0.4),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)), elevation: 0,

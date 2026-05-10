@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({Key? key}) : super(key: key);
+  const NotificationsScreen({super.key});
 
   @override
   State<NotificationsScreen> createState() => _NotificationsScreenState();
@@ -16,15 +16,11 @@ class _NotificationsScreenState extends State<NotificationsScreen>
   static const Color _bg         = Color(0xFFF6F4F0);
   static const Color _surface    = Color(0xFFFFFFFF);
   static const Color _sage       = Color(0xFF7CA982);
-  static const Color _sageLight  = Color(0xFFD4EAD7);
   static const Color _teal       = Color(0xFF4A9EAF);
   static const Color _tealLight  = Color(0xFFD6EEF3);
   static const Color _peach      = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
   static const Color _lavLight   = Color(0xFFEAE6F5);
-  static const Color _gold       = Color(0xFFF4C542);
-  static const Color _goldLight  = Color(0xFFFDF3CC);
   static const Color _textDark   = Color(0xFF2D3142);
   static const Color _textMid    = Color(0xFF6B7280);
   static const Color _textLight  = Color(0xFF9CA3AF);
@@ -287,18 +283,18 @@ class _NotificationsScreenState extends State<NotificationsScreen>
           borderRadius: BorderRadius.circular(20),
           border: read
               ? Border.all(color: _border)
-              : Border.all(color: color.withOpacity(0.4), width: 1.5),
+              : Border.all(color: color.withValues(alpha: 0.4), width: 1.5),
           boxShadow: read
               ? [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),
                 ]
               : [
                   BoxShadow(
-                    color: color.withOpacity(0.15),
+                    color: color.withValues(alpha: 0.15),
                     blurRadius: 14,
                     offset: const Offset(0, 4),
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AchievementsScreen extends StatefulWidget {
-  const AchievementsScreen({Key? key}) : super(key: key);
+  const AchievementsScreen({super.key});
 
   @override
   State<AchievementsScreen> createState() => _AchievementsScreenState();
@@ -16,14 +16,6 @@ class _AchievementsScreenState extends State<AchievementsScreen>
   // ── Palette ───────────────────────────────────────────────────────────────
   static const Color _bg         = Color(0xFFF6F4F0);
   static const Color _surface    = Color(0xFFFFFFFF);
-  static const Color _sage       = Color(0xFF7CA982);
-  static const Color _sageLight  = Color(0xFFD4EAD7);
-  static const Color _teal       = Color(0xFF4A9EAF);
-  static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
-  static const Color _lavender   = Color(0xFF9B8EC4);
-  static const Color _lavLight   = Color(0xFFEAE6F5);
   static const Color _gold       = Color(0xFFF4C542);
   static const Color _goldLight  = Color(0xFFFDF3CC);
   static const Color _textDark   = Color(0xFF2D3142);
@@ -266,19 +258,19 @@ class _AchievementsScreenState extends State<AchievementsScreen>
           color: _surface,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: unlocked ? accent.withOpacity(0.3) : _border,
+            color: unlocked ? accent.withValues(alpha: 0.3) : _border,
           ),
           boxShadow: unlocked
               ? [
                   BoxShadow(
-                    color: accent.withOpacity(0.1),
+                    color: accent.withValues(alpha: 0.1),
                     blurRadius: 14,
                     offset: const Offset(0, 4),
                   ),
                 ]
               : [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 10,
                     offset: const Offset(0, 3),
                   ),
@@ -426,7 +418,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: _gold.withOpacity(0.3),
+                    color: _gold.withValues(alpha: 0.3),
                     blurRadius: 20,
                     offset: const Offset(0, 6),
                   ),
@@ -497,7 +489,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
                         color: light,
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                            color: accent.withOpacity(0.3)),
+                            color: accent.withValues(alpha: 0.3)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

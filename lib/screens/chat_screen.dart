@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  const ChatScreen({super.key});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen>
-    with TickerProviderStateMixin {
-  final _messageController   = TextEditingController();
-  final _scrollController    = ScrollController();
+class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
+  final _messageController = TextEditingController();
+  final _scrollController = ScrollController();
   List<Map<String, dynamic>> _messages = [];
   bool _isTyping = false;
-  
+
   // Selected counsellor
   Map<String, dynamic> _selectedCounsellor = {};
-  bool _showSelector = false;
 
   // Counsellors list
   final List<Map<String, dynamic>> _counsellors = [
@@ -26,13 +24,15 @@ class _ChatScreenState extends State<ChatScreen>
       'title': 'Clinical Psychologist & Addiction Specialist',
       'specialties': ['Substance Abuse', 'Anxiety', 'Trauma'],
       'experience': '12+ years',
-      'bio': 'Dr. Johnson specializes in evidence-based treatments for addiction recovery, including CBT and motivational interviewing.',
+      'bio':
+          'Dr. Johnson specializes in evidence-based treatments for addiction recovery, including CBT and motivational interviewing.',
       'rating': 4.9,
       'reviews': 128,
       'imageIcon': Icons.person_rounded,
       'color': Color(0xFF7CA982),
       'isOnline': true,
-      'greeting': 'Hello! I\'m Dr. Sarah Johnson. I specialize in addiction recovery and anxiety management. How are you feeling today?',
+      'greeting':
+          'Hello! I\'m Dr. Sarah Johnson. I specialize in addiction recovery and anxiety management. How are you feeling today?',
     },
     {
       'id': 2,
@@ -40,105 +40,130 @@ class _ChatScreenState extends State<ChatScreen>
       'title': 'Licensed Clinical Social Worker',
       'specialties': ['Dual Diagnosis', 'Family Therapy', 'Relapse Prevention'],
       'experience': '8+ years',
-      'bio': 'Michael brings a compassionate, client-centered approach to recovery. He specializes in working with individuals facing co-occurring mental health conditions.',
+      'bio':
+          'Michael brings a compassionate, client-centered approach to recovery. He specializes in working with individuals facing co-occurring mental health conditions.',
       'rating': 4.8,
       'reviews': 94,
       'imageIcon': Icons.person_rounded,
       'color': Color(0xFF4A9EAF),
       'isOnline': true,
-      'greeting': 'Hi there! I\'m Michael Chen. I focus on dual diagnosis and family therapy. What\'s on your mind today?',
+      'greeting':
+          'Hi there! I\'m Michael Chen. I focus on dual diagnosis and family therapy. What\'s on your mind today?',
     },
     {
       'id': 3,
       'name': 'Dr. Emily Rodriguez',
       'title': 'Psychiatrist & Addiction Medicine',
-      'specialties': ['Medication Management', 'Co-occurring Disorders', 'Crisis Intervention'],
+      'specialties': [
+        'Medication Management',
+        'Co-occurring Disorders',
+        'Crisis Intervention'
+      ],
       'experience': '15+ years',
-      'bio': 'Dr. Rodriguez is board-certified in both Psychiatry and Addiction Medicine. She offers medication-assisted treatment alongside therapeutic support.',
+      'bio':
+          'Dr. Rodriguez is board-certified in both Psychiatry and Addiction Medicine. She offers medication-assisted treatment alongside therapeutic support.',
       'rating': 4.95,
       'reviews': 203,
       'imageIcon': Icons.medical_services_rounded,
       'color': Color(0xFFE8926A),
       'isOnline': false,
-      'greeting': 'Hello, I\'m Dr. Emily Rodriguez. I specialize in medication management and crisis intervention. I\'ll respond as soon as I\'m available.',
+      'greeting':
+          'Hello, I\'m Dr. Emily Rodriguez. I specialize in medication management and crisis intervention. I\'ll respond as soon as I\'m available.',
     },
     {
       'id': 4,
       'name': 'David Okonkwo, MA',
       'title': 'Certified Addiction Counselor',
-      'specialties': ['Recovery Coaching', 'Life Skills', 'Motivation Enhancement'],
+      'specialties': [
+        'Recovery Coaching',
+        'Life Skills',
+        'Motivation Enhancement'
+      ],
       'experience': '10+ years',
-      'bio': 'David is a person in long-term recovery who brings lived experience to his counseling approach.',
+      'bio':
+          'David is a person in long-term recovery who brings lived experience to his counseling approach.',
       'rating': 4.85,
       'reviews': 156,
       'imageIcon': Icons.person_rounded,
       'color': Color(0xFF9B8EC4),
       'isOnline': true,
-      'greeting': 'Hey! I\'m David. As someone in recovery myself, I understand the journey. How can I support you today?',
+      'greeting':
+          'Hey! I\'m David. As someone in recovery myself, I understand the journey. How can I support you today?',
     },
     {
       'id': 5,
       'name': 'Dr. Lisa Thompson',
       'title': 'Clinical Psychologist',
-      'specialties': ['Cognitive Behavioral Therapy', 'Mindfulness', 'Stress Management'],
+      'specialties': [
+        'Cognitive Behavioral Therapy',
+        'Mindfulness',
+        'Stress Management'
+      ],
       'experience': '9+ years',
-      'bio': 'Dr. Thompson integrates mindfulness-based approaches with traditional CBT to help clients develop healthier coping mechanisms.',
+      'bio':
+          'Dr. Thompson integrates mindfulness-based approaches with traditional CBT to help clients develop healthier coping mechanisms.',
       'rating': 4.9,
       'reviews': 112,
       'imageIcon': Icons.person_rounded,
       'color': Color(0xFFF4C542),
       'isOnline': false,
-      'greeting': 'Hello, I\'m Dr. Lisa Thompson. I focus on CBT and mindfulness techniques. I look forward to connecting with you soon.',
+      'greeting':
+          'Hello, I\'m Dr. Lisa Thompson. I focus on CBT and mindfulness techniques. I look forward to connecting with you soon.',
     },
     {
       'id': 6,
       'name': 'Rachel Green, LPC',
       'title': 'Licensed Professional Counselor',
-      'specialties': ['Young Adult Recovery', 'Relationship Issues', 'Self-Esteem'],
+      'specialties': [
+        'Young Adult Recovery',
+        'Relationship Issues',
+        'Self-Esteem'
+      ],
       'experience': '7+ years',
-      'bio': 'Rachel specializes in working with young adults navigating recovery while managing career, relationships, and identity development.',
+      'bio':
+          'Rachel specializes in working with young adults navigating recovery while managing career, relationships, and identity development.',
       'rating': 4.75,
       'reviews': 87,
       'imageIcon': Icons.person_rounded,
       'color': Color(0xFF7CA982),
       'isOnline': true,
-      'greeting': 'Hi! I\'m Rachel Green. I specialize in young adult recovery and relationship issues. What would you like to talk about?',
+      'greeting':
+          'Hi! I\'m Rachel Green. I specialize in young adult recovery and relationship issues. What would you like to talk about?',
     },
   ];
 
   // Dot animation controllers for typing indicator
   late List<AnimationController> _dotControllers;
-  late List<Animation<double>>   _dotAnims;
+  late List<Animation<double>> _dotAnims;
 
   // ── Palette ───────────────────────────────────────────────────────────────
-  static const Color _bg         = Color(0xFFF6F4F0);
-  static const Color _surface    = Color(0xFFFFFFFF);
-  static const Color _sage       = Color(0xFF7CA982);
-  static const Color _sageLight  = Color(0xFFD4EAD7);
-  static const Color _teal       = Color(0xFF4A9EAF);
-  static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
+  static const Color _bg = Color(0xFFF6F4F0);
+  static const Color _surface = Color(0xFFFFFFFF);
+  static const Color _sage = Color(0xFF7CA982);
+  static const Color _teal = Color(0xFF4A9EAF);
+  static const Color _tealLight = Color(0xFFD6EEF3);
+  static const Color _peach = Color(0xFFE8926A);
   static const Color _peachLight = Color(0xFFFAE2D5);
-  static const Color _textDark   = Color(0xFF2D3142);
-  static const Color _textMid    = Color(0xFF6B7180);
-  static const Color _textLight  = Color(0xFF9CA3AF);
-  static const Color _border     = Color(0xFFE8E5E0);
+  static const Color _textDark = Color(0xFF2D3142);
+  static const Color _textMid = Color(0xFF6B7180);
+  static const Color _textLight = Color(0xFF9CA3AF);
+  static const Color _border = Color(0xFFE8E5E0);
 
   List<String> get _quickReplies => [
-    'I\'m having cravings',
-    'Need coping strategies',
-    'Feeling triggered',
-    'Worried about relapse',
-    'Proud of my progress',
-  ];
+        'I\'m having cravings',
+        'Need coping strategies',
+        'Feeling triggered',
+        'Worried about relapse',
+        'Proud of my progress',
+      ];
 
   @override
   void initState() {
     super.initState();
-    
+
     // Set default counsellor (first one)
     _selectedCounsellor = _counsellors[0];
-    
+
     // Initialize typing animation controllers
     _dotControllers = List.generate(
       3,
@@ -175,7 +200,9 @@ class _ChatScreenState extends State<ChatScreen>
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
-    for (final c in _dotControllers) c.dispose();
+    for (final c in _dotControllers) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -193,9 +220,9 @@ class _ChatScreenState extends State<ChatScreen>
 
   String _timestamp() {
     final now = DateTime.now();
-    final h   = now.hour > 12 ? now.hour - 12 : (now.hour == 0 ? 12 : now.hour);
-    final m   = now.minute.toString().padLeft(2, '0');
-    final ap  = now.hour >= 12 ? 'PM' : 'AM';
+    final h = now.hour > 12 ? now.hour - 12 : (now.hour == 0 ? 12 : now.hour);
+    final m = now.minute.toString().padLeft(2, '0');
+    final ap = now.hour >= 12 ? 'PM' : 'AM';
     return '$h:$m $ap';
   }
 
@@ -203,18 +230,24 @@ class _ChatScreenState extends State<ChatScreen>
     final text = _messageController.text.trim();
     if (text.isEmpty) return;
     setState(() {
-      _messages.add({'text': text, 'isMe': true, 'time': _timestamp(), 'status': 'sent'});
+      _messages.add(
+          {'text': text, 'isMe': true, 'time': _timestamp(), 'status': 'sent'});
       _isTyping = true;
     });
     _messageController.clear();
     _scrollToBottom();
-    
+
     // Simulate counsellor response based on message content
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
       String response = _getResponseForMessage(text);
       setState(() {
-        _messages.add({'text': response, 'isMe': false, 'time': _timestamp(), 'status': 'read'});
+        _messages.add({
+          'text': response,
+          'isMe': false,
+          'time': _timestamp(),
+          'status': 'read'
+        });
         _isTyping = false;
       });
       _scrollToBottom();
@@ -224,7 +257,7 @@ class _ChatScreenState extends State<ChatScreen>
   String _getResponseForMessage(String message) {
     final lowerMsg = message.toLowerCase();
     final counsellorName = _selectedCounsellor['name'].split(' ').first;
-    
+
     if (lowerMsg.contains('craving') || lowerMsg.contains('urge')) {
       return 'I understand cravings can be intense, $counsellorName here. Let\'s try some grounding techniques. Take 5 deep breaths with me. Would you like me to suggest some distraction activities?';
     } else if (lowerMsg.contains('trigger') || lowerMsg.contains('stress')) {
@@ -246,16 +279,26 @@ class _ChatScreenState extends State<ChatScreen>
 
   void _sendQuickReply(String reply) {
     setState(() {
-      _messages.add({'text': reply, 'isMe': true, 'time': _timestamp(), 'status': 'sent'});
+      _messages.add({
+        'text': reply,
+        'isMe': true,
+        'time': _timestamp(),
+        'status': 'sent'
+      });
       _isTyping = true;
     });
     _scrollToBottom();
-    
+
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
       String response = _getResponseForMessage(reply);
       setState(() {
-        _messages.add({'text': response, 'isMe': false, 'time': _timestamp(), 'status': 'read'});
+        _messages.add({
+          'text': response,
+          'isMe': false,
+          'time': _timestamp(),
+          'status': 'read'
+        });
         _isTyping = false;
       });
       _scrollToBottom();
@@ -265,11 +308,10 @@ class _ChatScreenState extends State<ChatScreen>
   void _changeCounsellor(Map<String, dynamic> counsellor) {
     setState(() {
       _selectedCounsellor = counsellor;
-      _showSelector = false;
       _initializeChat();
     });
     _scrollToBottom();
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Now chatting with ${counsellor['name']}'),
@@ -286,12 +328,14 @@ class _ChatScreenState extends State<ChatScreen>
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Emergency Support', style: TextStyle(color: _peach, fontWeight: FontWeight.w800)),
+        title: const Text('Emergency Support',
+            style: TextStyle(color: _peach, fontWeight: FontWeight.w800)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('If this is a life-threatening emergency, please call 911 immediately.'),
+            const Text(
+                'If this is a life-threatening emergency, please call 911 immediately.'),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(12),
@@ -326,7 +370,8 @@ class _ChatScreenState extends State<ChatScreen>
       children: [
         Icon(Icons.phone_rounded, color: _peach, size: 16),
         const SizedBox(width: 8),
-        Text(number, style: TextStyle(color: _peach, fontWeight: FontWeight.w700)),
+        Text(number,
+            style: TextStyle(color: _peach, fontWeight: FontWeight.w700)),
         const SizedBox(width: 8),
         Text(description, style: TextStyle(color: _textMid, fontSize: 12)),
       ],
@@ -341,15 +386,14 @@ class _ChatScreenState extends State<ChatScreen>
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
-        constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.72),
+        constraints:
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.72),
         child: Column(
           crossAxisAlignment:
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: isMe ? _teal : _surface,
                 borderRadius: BorderRadius.only(
@@ -364,7 +408,7 @@ class _ChatScreenState extends State<ChatScreen>
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(isMe ? 0.12 : 0.06),
+                    color: Colors.black.withValues(alpha: isMe ? 0.12 : 0.06),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -386,8 +430,8 @@ class _ChatScreenState extends State<ChatScreen>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(time,
-                      style: const TextStyle(
-                          color: _textLight, fontSize: 10.5)),
+                      style:
+                          const TextStyle(color: _textLight, fontSize: 10.5)),
                   if (isMe) ...[
                     const SizedBox(width: 4),
                     Icon(
@@ -425,7 +469,7 @@ class _ChatScreenState extends State<ChatScreen>
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -444,10 +488,11 @@ class _ChatScreenState extends State<ChatScreen>
                   builder: (_, __) => Transform.translate(
                     offset: Offset(0, _dotAnims[i].value),
                     child: Container(
-                      width: 6, height: 6,
+                      width: 6,
+                      height: 6,
                       margin: const EdgeInsets.symmetric(horizontal: 2),
-                      decoration: BoxDecoration(
-                          color: _teal, shape: BoxShape.circle),
+                      decoration:
+                          BoxDecoration(color: _teal, shape: BoxShape.circle),
                     ),
                   ),
                 );
@@ -513,7 +558,8 @@ class _ChatScreenState extends State<ChatScreen>
                   itemCount: _counsellors.length,
                   itemBuilder: (context, index) {
                     final counsellor = _counsellors[index];
-                    final isSelected = _selectedCounsellor['id'] == counsellor['id'];
+                    final isSelected =
+                        _selectedCounsellor['id'] == counsellor['id'];
                     return _buildCounsellorOption(counsellor, isSelected);
                   },
                 ),
@@ -526,7 +572,8 @@ class _ChatScreenState extends State<ChatScreen>
     );
   }
 
-  Widget _buildCounsellorOption(Map<String, dynamic> counsellor, bool isSelected) {
+  Widget _buildCounsellorOption(
+      Map<String, dynamic> counsellor, bool isSelected) {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
@@ -536,7 +583,9 @@ class _ChatScreenState extends State<ChatScreen>
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? (counsellor['color'] as Color).withOpacity(0.1) : _bg,
+          color: isSelected
+              ? (counsellor['color'] as Color).withValues(alpha: 0.1)
+              : _bg,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isSelected ? counsellor['color'] : _border,
@@ -595,9 +644,11 @@ class _ChatScreenState extends State<ChatScreen>
                       ),
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: (counsellor['color'] as Color).withOpacity(0.15),
+                          color: (counsellor['color'] as Color)
+                              .withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -624,9 +675,12 @@ class _ChatScreenState extends State<ChatScreen>
                   const SizedBox(height: 4),
                   Wrap(
                     spacing: 4,
-                    children: (counsellor['specialties'] as List<String>).take(2).map((specialty) {
+                    children: (counsellor['specialties'] as List<String>)
+                        .take(2)
+                        .map((specialty) {
                       return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: _border,
                           borderRadius: BorderRadius.circular(8),
@@ -645,7 +699,8 @@ class _ChatScreenState extends State<ChatScreen>
               ),
             ),
             if (isSelected)
-              Icon(Icons.check_circle_rounded, color: counsellor['color'], size: 24)
+              Icon(Icons.check_circle_rounded,
+                  color: counsellor['color'], size: 24)
             else if (counsellor['isOnline'] == true)
               Icon(Icons.circle_rounded, color: _sage, size: 12)
             else
@@ -666,11 +721,10 @@ class _ChatScreenState extends State<ChatScreen>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                    color: _border,
-                    borderRadius: BorderRadius.circular(20)),
+                    color: _border, borderRadius: BorderRadius.circular(20)),
                 child: Text(label,
                     style: const TextStyle(
                         color: _textLight,
@@ -696,8 +750,7 @@ class _ChatScreenState extends State<ChatScreen>
         backgroundColor: _surface,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: _textDark),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: _textDark),
           onPressed: () => Navigator.pop(context),
         ),
         title: GestureDetector(
@@ -707,7 +760,8 @@ class _ChatScreenState extends State<ChatScreen>
               Stack(
                 children: [
                   Container(
-                    width: 40, height: 40,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: counsellorColor,
                       shape: BoxShape.circle,
@@ -719,9 +773,11 @@ class _ChatScreenState extends State<ChatScreen>
                     ),
                   ),
                   Positioned(
-                    bottom: 1, right: 1,
+                    bottom: 1,
+                    right: 1,
                     child: Container(
-                      width: 10, height: 10,
+                      width: 10,
+                      height: 10,
                       decoration: BoxDecoration(
                         color: isOnline ? _sage : _textLight,
                         shape: BoxShape.circle,
@@ -754,7 +810,9 @@ class _ChatScreenState extends State<ChatScreen>
                     ],
                   ),
                   Text(
-                    isOnline ? 'Online · Tap to change' : 'Offline · Tap to change',
+                    isOnline
+                        ? 'Online · Tap to change'
+                        : 'Offline · Tap to change',
                     style: TextStyle(
                       color: isOnline ? _sage : _textLight,
                       fontSize: 10.5,
@@ -772,8 +830,8 @@ class _ChatScreenState extends State<ChatScreen>
             child: GestureDetector(
               onTap: _showEmergencyDialog,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
                     color: _peachLight,
                     borderRadius: BorderRadius.circular(20)),
@@ -848,8 +906,7 @@ class _ChatScreenState extends State<ChatScreen>
                       decoration: BoxDecoration(
                         color: _tealLight,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                            color: _teal.withOpacity(0.3)),
+                        border: Border.all(color: _teal.withValues(alpha: 0.3)),
                       ),
                       child: Text(
                         _quickReplies[i],
@@ -882,16 +939,15 @@ class _ChatScreenState extends State<ChatScreen>
                     ),
                     child: TextField(
                       controller: _messageController,
-                      style: const TextStyle(
-                          color: _textDark, fontSize: 14.5),
+                      style: const TextStyle(color: _textDark, fontSize: 14.5),
                       maxLines: 4,
                       minLines: 1,
                       textInputAction: TextInputAction.send,
                       onSubmitted: (_) => _sendMessage(),
                       decoration: InputDecoration(
                         hintText: 'Type your message here...',
-                        hintStyle: const TextStyle(
-                            color: _textLight, fontSize: 14),
+                        hintStyle:
+                            const TextStyle(color: _textLight, fontSize: 14),
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 18, vertical: 12),
@@ -903,13 +959,14 @@ class _ChatScreenState extends State<ChatScreen>
                 GestureDetector(
                   onTap: _sendMessage,
                   child: Container(
-                    width: 46, height: 46,
+                    width: 46,
+                    height: 46,
                     decoration: BoxDecoration(
                       color: counsellorColor,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: counsellorColor.withOpacity(0.35),
+                          color: counsellorColor.withValues(alpha: 0.35),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),

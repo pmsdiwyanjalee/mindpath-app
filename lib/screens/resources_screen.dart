@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResourcesScreen extends StatefulWidget {
-  const ResourcesScreen({Key? key}) : super(key: key);
+  const ResourcesScreen({super.key});
 
   @override
   State<ResourcesScreen> createState() => _ResourcesScreenState();
@@ -19,12 +19,8 @@ class _ResourcesScreenState extends State<ResourcesScreen>
   static const Color _sageLight  = Color(0xFFD4EAD7);
   static const Color _teal       = Color(0xFF4A9EAF);
   static const Color _tealLight  = Color(0xFFD6EEF3);
-  static const Color _peach      = Color(0xFFE8926A);
-  static const Color _peachLight = Color(0xFFFAE2D5);
   static const Color _lavender   = Color(0xFF9B8EC4);
   static const Color _lavLight   = Color(0xFFEAE6F5);
-  static const Color _gold       = Color(0xFFF4C542);
-  static const Color _goldLight  = Color(0xFFFDF3CC);
   static const Color _textDark   = Color(0xFF2D3142);
   static const Color _textMid    = Color(0xFF6B7280);
   static const Color _textLight  = Color(0xFF9CA3AF);
@@ -247,7 +243,7 @@ class _ResourcesScreenState extends State<ResourcesScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 14,
               offset: const Offset(0, 4),
             ),
@@ -392,7 +388,7 @@ class _ResourcesScreenState extends State<ResourcesScreen>
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: _teal.withOpacity(0.3),
+                      color: _teal.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 6),
                     ),
@@ -437,7 +433,7 @@ class _ResourcesScreenState extends State<ResourcesScreen>
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
+                      color: Colors.black.withValues(alpha: 0.04),
                       blurRadius: 12,
                       offset: const Offset(0, 3),
                     ),
