@@ -22,6 +22,14 @@ import 'screens/success_stories_screen.dart';
 import 'screens/medication_tracker_screen.dart';
 import 'screens/notifications_screen.dart';
 import 'screens/emergency_resources_screen.dart';
+import 'admin/admin_login_screen.dart';
+import 'admin/admin_dashboard_screen.dart';
+import 'admin/admin_users_management_screen.dart';
+import 'admin/admin_counselors_management_screen.dart';
+import 'admin/admin_resources_management_screen.dart';
+import 'admin/admin_analytics_screen.dart';
+import 'admin/admin_support_tickets_screen.dart';
+import 'admin/admin_data_models.dart';
 
 void main() {
   runApp(const MyApp());
@@ -99,6 +107,28 @@ class MyApp extends StatelessWidget {
             '/medications': (_) => const MedicationTrackerScreen(),
             '/notifications': (_) => const NotificationsScreen(),
             '/emergency': (_) => const EmergencyResourcesScreen(),
+            '/admin-login': (_) => const AdminLoginScreen(),
+            '/admin-dashboard': (context) {
+              final args =
+                  ModalRoute.of(context)?.settings.arguments as AdminUser?;
+              return AdminDashboardScreen(
+                  adminUser: args ??
+                      AdminUser(
+                        id: 'default',
+                        email: 'admin@mindpath.com',
+                        password: 'Admin@2024',
+                        fullName: 'Admin User',
+                        role: 'admin',
+                        createdAt: DateTime.now(),
+                        isActive: true,
+                        permissions: ['read', 'write', 'delete'],
+                      ));
+            },
+            '/admin-users': (_) => const AdminUsersManagementScreen(),
+            '/admin-counselors': (_) => const AdminCounselorsManagementScreen(),
+            '/admin-resources': (_) => const AdminResourcesManagementScreen(),
+            '/admin-analytics': (_) => const AdminAnalyticsScreen(),
+            '/admin-support': (_) => const AdminSupportTicketsScreen(),
           },
         );
       },

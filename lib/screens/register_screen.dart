@@ -203,14 +203,21 @@ class _RegisterScreenState extends State<RegisterScreen>
     final p = _passwordController.text;
     final c = _confirmController.text;
 
-    if (f.isEmpty || e.isEmpty || p.isEmpty || c.isEmpty)
+    if (f.isEmpty || e.isEmpty || p.isEmpty || c.isEmpty) {
       return _err('All fields are required.');
-    if (!RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+").hasMatch(e))
+    }
+    if (!RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+").hasMatch(e)) {
       return _err('Please enter a valid email address.');
-    if (p.length < 8) return _err('Password must be at least 8 characters.');
-    if (p != c) return _err('Passwords do not match.');
-    if (!_agreePolicy || !_consentAI)
+    }
+    if (p.length < 8) {
+      return _err('Password must be at least 8 characters.');
+    }
+    if (p != c) {
+      return _err('Passwords do not match.');
+    }
+    if (!_agreePolicy || !_consentAI) {
       return _err('Please agree to the policy and consent to data usage.');
+    }
 
     setState(() => _isLoading = false);
     Navigator.pushReplacementNamed(context, '/dashboard');
@@ -236,14 +243,24 @@ class _RegisterScreenState extends State<RegisterScreen>
         p.isEmpty ||
         c.isEmpty ||
         l.isEmpty ||
-        i.isEmpty) return _err('All fields are required.');
-    if (!RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+").hasMatch(e))
+        i.isEmpty) {
+      return _err('All fields are required.');
+    }
+    if (!RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+").hasMatch(e)) {
       return _err('Please enter a valid email address.');
-    if (p.length < 8) return _err('Password must be at least 8 characters.');
-    if (p != c) return _err('Passwords do not match.');
-    if (_credFile == null)
+    }
+    if (p.length < 8) {
+      return _err('Password must be at least 8 characters.');
+    }
+    if (p != c) {
+      return _err('Passwords do not match.');
+    }
+    if (_credFile == null) {
       return _err('Please upload your professional credentials (PDF/JPG).');
-    if (!_agreePolicy) return _err('Please agree to the terms and policy.');
+    }
+    if (!_agreePolicy) {
+      return _err('Please agree to the terms and policy.');
+    }
 
     // Here you would upload _credFile and _certFile to your backend/storage
     // e.g. await uploadFileToStorage(_credFile!);
@@ -261,8 +278,9 @@ class _RegisterScreenState extends State<RegisterScreen>
     if (!mounted) return;
 
     final otp = _otpController.text.trim();
-    if (otp.length != 6)
+    if (otp.length != 6) {
       return _err('Please enter the 6-digit code sent to your email.');
+    }
 
     setState(() => _isLoading = false);
     Navigator.pushReplacementNamed(context, '/dashboard');
