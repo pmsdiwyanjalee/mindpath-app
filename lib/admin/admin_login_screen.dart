@@ -53,8 +53,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
     if (!mounted) return;
 
     if (adminUser != null) {
-      Navigator.of(context)
-          .pushReplacementNamed('/admin-dashboard', arguments: adminUser);
+      Navigator.of(context).pushNamed('/admin-dashboard', arguments: adminUser);
     } else {
       setState(() {
         _errorMessage = 'Invalid email or password';
