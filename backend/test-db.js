@@ -3,14 +3,16 @@ const { sequelize } = require('./models');
 async function testConnection() {
   try {
     await sequelize.authenticate();
-    console.log('✅ MySQL connection has been established successfully.');
+    console.log('✅ SQLite database connected successfully.');
 
-    // Test creating tables
+    // Test creating/syncing tables
     await sequelize.sync({ force: false });
     console.log('✅ Database tables synchronized successfully.');
 
+    console.log('✅ Database setup completed successfully!');
   } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
+    console.error('❌ Database setup failed:', error.message);
+    process.exit(1);
   } finally {
     await sequelize.close();
   }
