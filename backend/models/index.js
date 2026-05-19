@@ -32,12 +32,12 @@ const syncDatabase = async () => {
     console.log('Database synchronized successfully');
   } catch (error) {
     console.error('Error synchronizing database:', error);
+    throw error;
   }
 };
 
-syncDatabase();
-
 module.exports = {
   sequelize,
+  syncDatabase,
   ...models
 };

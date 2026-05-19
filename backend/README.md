@@ -15,7 +15,7 @@ A Node.js/Express backend API for the MindPath mental health mobile application.
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **Database**: MongoDB with Mongoose
+- **Database**: SQLite with Sequelize
 - **Authentication**: JWT (JSON Web Tokens)
 - **Validation**: express-validator
 - **Password Hashing**: bcryptjs
@@ -25,7 +25,6 @@ A Node.js/Express backend API for the MindPath mental health mobile application.
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (local installation or cloud service like MongoDB Atlas)
 - npm or yarn
 
 ### Installation
@@ -41,18 +40,17 @@ A Node.js/Express backend API for the MindPath mental health mobile application.
    ```
 
 3. Create a `.env` file in the backend directory with the following variables:
-   ```
+   ```bash
    PORT=5000
-   MONGO_URI=mongodb://localhost:27017/mindpath
+   DB_STORAGE=./database.sqlite
    JWT_SECRET=your_super_secret_jwt_key_here
    NODE_ENV=development
    ```
 
-4. Start MongoDB service (if running locally)
-
-5. Start the server:
+4. Initialize the local SQLite database:
    ```bash
-   npm start
+   npm run db:init
+   ```
    ```
 
    For development with auto-restart:
@@ -125,6 +123,11 @@ The server will start on `http://localhost:5000`
 ### Chat
 - Real-time messaging between users and counsellors
 
+### Database
+- Local SQLite database stored at `./database.sqlite`
+- Sequelize creates and syncs tables automatically on startup
+- Use `npm run db:init` to create/synchronize the database tables before running the app
+
 ## Authentication
 
 All protected routes require a JWT token in the Authorization header:
@@ -137,7 +140,7 @@ Authorization: Bearer <token>
 ### Project Structure
 ```
 backend/
-├── models/          # Mongoose schemas
+├── models/          # Sequelize models
 ├── routes/          # API route handlers
 ├── middleware/      # Custom middleware
 ├── server.js        # Main application file
@@ -154,7 +157,7 @@ backend/
 
 ## Deployment
 
-1. Set up production MongoDB database
+1. Set up production SQLite database or another SQL database and update `DB_STORAGE` accordingly
 2. Update `.env` with production values
 3. Set `NODE_ENV=production`
 4. Use a process manager like PM2
