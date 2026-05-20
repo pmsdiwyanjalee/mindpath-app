@@ -163,6 +163,31 @@ backend/
 4. Use a process manager like PM2
 5. Set up reverse proxy with nginx
 
+## MySQL / XAMPP Setup
+
+If you want to use MySQL with XAMPP instead of SQLite:
+
+1. Start XAMPP and activate `Apache` and `MySQL`.
+2. Open phpMyAdmin and create a database named `mindpath`.
+3. Import `backend/mysql_schema.sql` to create the tables.
+4. (Optional) Import `backend/mysql_sample_data.sql` to add sample records.
+5. Install the MySQL driver:
+   ```bash
+   cd backend
+   npm install mysql2
+   ```
+6. Update `backend/config/database.js` to use the MySQL connection settings.
+7. Update `backend/.env` with:
+   ```env
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_NAME=mindpath
+   DB_USER=root
+   DB_PASSWORD=
+   JWT_SECRET=your_jwt_secret_key_here
+   NODE_ENV=development
+   ```
+
 ## Contributing
 
 1. Follow the existing code structure
